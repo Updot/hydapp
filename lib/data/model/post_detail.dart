@@ -6,13 +6,13 @@ import 'community_model.dart';
 import 'save_item_model.dart';
 
 class PostDetail extends CommunityPost {
-   List<Favourite>? _favouriteList;
+   List<Favourite> _favouriteList = [];
 
   PostDetail({List<Favourite>? favouriteList}) {
-    _favouriteList = favouriteList!;
+    _favouriteList = favouriteList ?? [];
   }
 
-  List<Favourite> get favouriteList => _favouriteList!;
+  List<Favourite> get favouriteList => _favouriteList;
 
   set favouriteList(List<Favourite> favouriteList) =>
       _favouriteList = favouriteList;
@@ -22,7 +22,7 @@ class PostDetail extends CommunityPost {
     placeModel.id = itemModel.id;
     placeModel.caption = itemModel.title;
     placeModel.image = itemModel.images;
-    placeModel.isFavorite = itemModel.isFavorite;
+    placeModel.isFavorite = itemModel.isFavorite!;
     return placeModel;
   }
 

@@ -103,10 +103,10 @@ class EventRepositoryImpl extends Repository implements EventRepository {
         final events = await remoteDataSource.fetchEvent(
           stateDate: stateDate!,
           endDate: endDate!,
-          cate: cate!,
-          filterAdv: filterAdv!,
+          cate: cate ?? '' ,
+          filterAdv: filterAdv ??{},
           filter: filter,
-          experId: experId!,
+          experId: experId ,
         );
 
         events.forEach((e) async {
@@ -174,7 +174,7 @@ class EventRepositoryImpl extends Repository implements EventRepository {
 
   Future<double> _distance(EventInfo event) async {
     final distance = await locationWrapper.calculateDistance(
-        double.tryParse(event.pickOneLocation!.lat)!,
+        double.tryParse(event.pickOneLocation!.lat ?? '0')!,
         double.tryParse(event.pickOneLocation!.long)!);
     return distance;
   }

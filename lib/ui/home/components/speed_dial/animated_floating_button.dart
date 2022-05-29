@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnimatedFloatingButton extends StatelessWidget {
-  final bool? visible;
+  final bool visible;
   final VoidCallback? callback;
   final VoidCallback? onLongPress;
   final Widget? child;
@@ -29,7 +29,7 @@ class AnimatedFloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final margin = visible! ? 0.0 : 28.0;
+    final margin = visible ? 0.0 : 28.0;
 
     return Container(
       constraints: const BoxConstraints(
@@ -42,8 +42,8 @@ class AnimatedFloatingButton extends StatelessWidget {
         curve: curve!,
         margin: EdgeInsets.all(margin),
         duration: const Duration(milliseconds: 150),
-        width: visible! ? 56.0 : 0.0,
-        height: visible! ? 56.0 : 0.0,
+        width: visible ? 56.0 : 0.0,
+        height: visible ? 56.0 : 0.0,
         child: GestureDetector(
           onLongPress: onLongPress,
           child: FloatingActionButton(
@@ -55,7 +55,7 @@ class AnimatedFloatingButton extends StatelessWidget {
             // elevation: elevation,
             // highlightElevation: elevation,
             shape: shape,
-            child: visible! ? child : null,
+            child: visible ? child : null,
           ),
         ),
       ),

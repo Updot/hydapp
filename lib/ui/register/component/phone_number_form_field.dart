@@ -92,7 +92,7 @@ class _PhoneNumberFormFieldState extends State<PhoneNumberFormField> {
                       iconRight: const Icon(Icons.keyboard_arrow_down,
                           size: sizeSmallxxxx, color: Colors.black),
                       textAlign: TextAlign.start,
-                      text: widget.text!,
+                      text: widget.text,
                       textStyle: textSmallx.copyWith(color: Colors.black),
                       onTap: widget.onPressCountryCode!,
                     ),

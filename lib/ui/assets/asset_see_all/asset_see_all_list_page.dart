@@ -148,10 +148,10 @@ class AssetSeeAllListScreenState extends BaseState<AssetSeeAllListScreen> {
                         Container(
                           height: sizeImageLarge,
                           child: ListView.builder(
-                            itemCount: (state.allAssets!.length).clamp(0, 6),
+                            itemCount: (state.allAssets.length).clamp(0, 6),
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int index) {
-                              final e = state.allAssets![index];
+                              final e = state.allAssets[index];
                               return Container(
                                 margin: const EdgeInsets.only(
                                     left: sizeVerySmall, right: sizeVerySmall),
@@ -191,12 +191,12 @@ class AssetSeeAllListScreenState extends BaseState<AssetSeeAllListScreen> {
   }
 
   Widget getListItemByCategory(AssetSeeAllState state, double height) {
-    var places = state.allAssets;
+    List<PlaceModel>? places = state.allAssets;
     if (state.currentCate != null) {
       places = state.listGroupCategories![state.currentCate];
     }
     return ListView.builder(
-      itemCount: places!.length,
+      itemCount: places?.length,
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, int index) {
         final e = places![index];

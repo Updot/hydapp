@@ -41,7 +41,7 @@ class MyTextView extends StatelessWidget {
       );
     } else if (maxLine > 0) {
       return Text(
-        text!,
+        text ?? '',
         key: key,
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
@@ -50,7 +50,7 @@ class MyTextView extends StatelessWidget {
       );
     } else {
       return Text(
-        text!,
+        text ?? '',
         key: key,
         textAlign: textAlign,
         style: textStyle,

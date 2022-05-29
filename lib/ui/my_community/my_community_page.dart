@@ -56,7 +56,7 @@ class MyCommunityPageState extends BaseState<MyCommunityPage> {
           create: (_) => _myCommunityBloc,
           child: BlocBuilder<MyCommunityBloc, MyCommunityState>(
               builder: (context, state) {
-            final len = state.listUserCommunityModel!.length;
+            final int len = state.listUserCommunityModel?.length ?? 0;
             return Container(
               color: const Color(0xffFDFBF5),
               child: SafeArea(

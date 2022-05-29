@@ -266,45 +266,48 @@ class EventScreenState extends BaseState<EventScreen> {
   Widget categoriesRender(EventState state) {
     return Container(
       height: sizeNormalxxx,
-      child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: sizeSmall),
-          scrollDirection: Axis.horizontal,
-          itemCount: state.eventCategories!.length,
-          itemBuilder: (e, index) {
-            final category = state.eventCategories![index];
-            return GestureDetector(
-              onTap: () async {
-                onClearSearch();
-                _eventBloc.add(SelectEventCategory(id: category.id.toString()));
-                // await Future.delayed(const Duration(milliseconds: 300));
-                // await refreshController.requestRefresh(
-                //     duration: const Duration(milliseconds: 300));
-              },
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(
-                    vertical: sizeVerySmallx, horizontal: sizeSmallxxx),
-                margin: const EdgeInsets.only(right: sizeSmall),
-                decoration: BoxDecoration(
-                    border: category.id != state.currentEventCateId
-                        ? Border.all(color: Colors.grey)
-                        : null,
-                    color: category.id == state.currentEventCateId
-                        ? const Color(0xff419C9B)
-                        : Colors.transparent,
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(sizeVerySmall))),
-                child: MyTextView(
-                  textAlign: TextAlign.center,
-                  text: category.name,
-                  textStyle: textSmallxx.copyWith(
-                      color: category.id == state.currentEventCateId
-                          ? Colors.white
-                          : Colors.grey),
-                ),
-              ),
-            );
-          }),
+      child: state.eventCategories != null
+          ? ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: sizeSmall),
+              scrollDirection: Axis.horizontal,
+              itemCount: state.eventCategories!.length,
+              itemBuilder: (e, index) {
+                final category = state.eventCategories![index];
+                return GestureDetector(
+                  onTap: () async {
+                    onClearSearch();
+                    _eventBloc
+                        .add(SelectEventCategory(id: category.id.toString()));
+                    // await Future.delayed(const Duration(milliseconds: 300));
+                    // await refreshController.requestRefresh(
+                    //     duration: const Duration(milliseconds: 300));
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: sizeVerySmallx, horizontal: sizeSmallxxx),
+                    margin: const EdgeInsets.only(right: sizeSmall),
+                    decoration: BoxDecoration(
+                        border: category.id != state.currentEventCateId
+                            ? Border.all(color: Colors.grey)
+                            : null,
+                        color: category.id == state.currentEventCateId
+                            ? const Color(0xff419C9B)
+                            : Colors.transparent,
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(sizeVerySmall))),
+                    child: MyTextView(
+                      textAlign: TextAlign.center,
+                      text: category.name,
+                      textStyle: textSmallxx.copyWith(
+                          color: category.id == state.currentEventCateId
+                              ? Colors.white
+                              : Colors.grey),
+                    ),
+                  ),
+                );
+              })
+          : SizedBox(),
     );
   }
 
@@ -369,9 +372,9 @@ class EventScreenState extends BaseState<EventScreen> {
         children: state.events!.entries.map(_renderEventItem).toList(),
       );
     }
-    final len =
-        state.groupEvents![state.currentEventCateId.toString()]!.entries.length;
-    return (len > 0)
+    final int? len =
+        state.groupEvents![state.currentEventCateId.toString()]?.entries.length;
+    return (len != null && len > 0)
         ? TweenAnimationBuilder(
             tween: Tween<Offset>(
                 begin: const Offset(0, 1), end: const Offset(0, 0)),

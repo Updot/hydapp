@@ -17,11 +17,11 @@ import '../../../utils/string_util.dart';
 import 'bloc.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final UserRepository? userRepository;
-  final ConfigRepository? configRepository;
+  final UserRepository userRepository;
+  final ConfigRepository configRepository;
 
-  ProfileBloc({@required this.userRepository, @required this.configRepository})
-      : super(ProfileState.initial(userRepository!, configRepository!));
+  ProfileBloc({required this.userRepository, required this.configRepository})
+      : super(ProfileState.initial(userRepository, configRepository));
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
@@ -41,7 +41,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         country = state.listCountry![0];
       }
 
-      final currentMarital = userInfo!.maritalStatus(state.listMarital!);
+      final currentMarital = userInfo!.maritalStatus(state.listMarital);
       final dateOfBirth = userInfo.dobDateTime();
 
       yield state.copyWith(
@@ -55,7 +55,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     } else if (event is OnSelectDOB) {
       yield state.copyWith(selectedDate: event.selectedDate);
     } else if (event is LoadCountryCode) {
-      final result = await configRepository!.getCountryCode();
+      final result = await configRepository.getCountryCode();
       yield* _handleGetCountryCodeResult(result);
     } else if (event is OnSelectCountryCode) {
       yield state.copyWith(selectedCountry: event.countryStatus);
@@ -70,7 +70,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   Stream<ProfileState> _handleUpdateProfile(ProfileChanged event) async* {
     if (state.pathImage!.isNotEmpty) {
-      await userRepository!.uploadPhoto(state.pathImage!);
+      await userRepository.uploadPhoto(state.pathImage!);
       // final uploader = sl<UploadPhotos>();
       // await uploader.uploadFile(UploadModel.init(file: [
       //   File(state.pathImage)
@@ -80,10 +80,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       //   'marital': event.marital,
       // }, typePost: TypePost.ADD_CHANGE_PROFILE_PHOTO));
     }
-    final result = await userRepository!.updateProfile(
+    final result = await userRepository.updateProfile(
         event.phone!, event.date!, event.marital!, event.dialCode!);
 
-    final userResult = await userRepository!.getMe();
+    final userResult = await userRepository.getMe();
 
     yield result.fold((l) {
       UIUtil.showToast((l as RemoteDataFailure).errorMessage);

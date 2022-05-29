@@ -134,9 +134,9 @@ class _MenuProfileDialogState extends State<MenuProfileDialog> {
                       : SizedBox(
                           height: sizeExLargex,
                           width: sizeExLargex,
-                          child: (widget.userInfo.photo.url!.isNotEmpty)
+                          child: ( widget.userInfo.photo != null && widget.userInfo.photo!.url!.isNotEmpty)
                               ? UIUtil.makeImageWidget(
-                                  widget.userInfo.photo.url ?? Res.icon_user,
+                                  widget.userInfo.photo?.url ?? Res.icon_user,
                                   size: const Size(sizeExLargex, sizeExLargex),
                                   boxFit: BoxFit.cover)
                               : const Icon(
@@ -275,8 +275,8 @@ class _MenuProfileDialogState extends State<MenuProfileDialog> {
             MyTextView(
               textAlign: TextAlign.start,
               text: langCode.toUpperCase() == PARAM_EN
-                  ? state.maritalStatusSelected!.nameEn
-                  : state.maritalStatusSelected!.nameAr,
+                  ? state.maritalStatusSelected?.nameEn
+                  : state.maritalStatusSelected?.nameAr,
               textStyle: textSmallxx.copyWith(color: Colors.black),
             ),
           ],
@@ -291,7 +291,7 @@ class _MenuProfileDialogState extends State<MenuProfileDialog> {
         context: context,
         builder: (BuildContext context) => MaritalDialog(
           listMarital: state.listMarital!,
-          maritalSelected: state.maritalStatusSelected!,
+          maritalSelected: state.maritalStatusSelected,
           onSelectMarital: onSelectMarital,
         ),
       );

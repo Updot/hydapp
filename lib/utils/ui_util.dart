@@ -104,7 +104,7 @@ class UIUtil {
   }
 
   static Widget makeCircleImageWidget(
-    String url, {
+    String? url, {
     double? size,
     Color color = Colors.amber,
     Color? blendColor,
@@ -166,7 +166,7 @@ class UIUtil {
             shape: BoxShape.circle,
             color: color,
             image: DecorationImage(
-                fit: BoxFit.cover, image: makeImageDecoration(url))));
+                fit: BoxFit.cover, image: makeImageDecoration(url!))));
   }
 
   static void showToast(

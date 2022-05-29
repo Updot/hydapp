@@ -76,9 +76,9 @@ class EventInfo {
           eventTime!.add(OpenTimeModel.fromJson(v));
         });
       }
-      category = ((json['category'] != null && json['category'] is Map)
+      category = (json['category'] != null && json['category'] is Map)
           ? CategoryModel.fromJson(json['category'])
-          : null)!;
+          : null;
       if (json['suitable'] != null) {
         suitable = <SuitableModel>[];
         json['suitable'].forEach((v) {

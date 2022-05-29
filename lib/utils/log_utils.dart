@@ -12,10 +12,10 @@ class LogUtils {
     // if (Configurations.environment != 'prod') {
     // ignore: avoid_print
     print('[${DateTime.now().toUtc()}] ${data!.toString()}');
-    if ((stacktrace!.isNotEmpty) && fullStacktrace) {
+    if ((stacktrace != null && stacktrace.isNotEmpty) && fullStacktrace) {
       final listLine = stacktrace.split('\n');
       listLine.forEach(print);
-    } else if (stacktrace.isNotEmpty) {
+    } else if (stacktrace != null && stacktrace.isNotEmpty) {
       final listLine = stacktrace.split('\n');
       listLine.isNotEmpty ? print(listLine[0]) : '';
     }

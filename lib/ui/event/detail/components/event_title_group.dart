@@ -628,7 +628,7 @@ class EventTitleGroup extends StatelessWidget {
     final event = Event(
       title: state!.eventDetailInfo!.title!,
       description: state!.eventDetailInfo!.description!,
-      location: state!.eventDetailInfo!.pickOneLocation!.address,
+      location: state!.eventDetailInfo!.pickOneLocation!.address ?? '',
       startDate: DateUtil.convertStringToDate(startDate,
           formatData: DateUtil.FORMAT_DATE_TIME_CS),
       endDate: DateUtil.convertStringToDate(endDate,

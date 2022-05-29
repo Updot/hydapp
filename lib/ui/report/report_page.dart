@@ -49,12 +49,12 @@ class ReportPageState extends BaseState<ReportPage> {
     _helpBloc.add(GetReportItems());
     _descriptionController.addListener(_onDescriptionChanged);
     _helpBloc.listen((state) {
-      if (state.isSuccessReport!) {
+      if (state.isSuccessReport) {
         // UIUtil.showToast(Lang.report_your_issue_is_successfully_submitted.tr());
         NavigateUtil.replacePage(
             context, CongratulationRegisterScreen.routeName,
             argument: {'type': CongratulationEnum.REPORT});
-      } else if (state.isError!) {
+      } else if (state.isError) {
         NavigateUtil.replacePage(
             context, CongratulationRegisterScreen.routeName,
             argument: {'type': CongratulationEnum.ERROR});

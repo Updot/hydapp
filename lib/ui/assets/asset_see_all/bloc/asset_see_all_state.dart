@@ -6,12 +6,12 @@ class AssetSeeAllState extends Equatable {
   final Map<CategoryModel, List<PlaceModel>>? listGroupCategories;
   final SortType? sortType;
   final CategoryModel? currentCate;
-  final List<PlaceModel>? allAssets;
+  final List<PlaceModel> allAssets;
 
   AssetSeeAllState({
     this.sortType,
     this.listGroupCategories,
-    this.allAssets,
+    this.allAssets = const[],
     this.currentCate,
     this.alsoLikeAssets,
   });
@@ -21,7 +21,7 @@ class AssetSeeAllState extends Equatable {
     return AssetSeeAllState(
       alsoLikeAssets: null,
       sortType: SortType.ASC,
-      allAssets: null,
+      allAssets: [],
       currentCate: null,
       listGroupCategories: null,
     );
@@ -45,10 +45,10 @@ class AssetSeeAllState extends Equatable {
 
   @override
   List<Object> get props => [
-        alsoLikeAssets!,
-        sortType!,
-        currentCate!,
-        allAssets!,
-        listGroupCategories!,
+        alsoLikeAssets ?? [],
+        sortType ?? '',
+        currentCate ?? '',
+        allAssets,
+        listGroupCategories ??{},
       ];
 }

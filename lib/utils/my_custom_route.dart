@@ -42,8 +42,8 @@ import '../ui/weekend_activity/detail/weekend_activity_detail_page.dart';
 import '../ui/weekend_activity/see_all/weekend_activity_see_all_page.dart';
 
 class MyCustomRoute<T> extends MaterialPageRoute<T> {
-  MyCustomRoute({WidgetBuilder? builder, RouteSettings? settings})
-      : super(builder: builder!, settings: settings);
+  MyCustomRoute({required WidgetBuilder builder, RouteSettings? settings})
+      : super(builder: builder, settings: settings);
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
@@ -126,13 +126,13 @@ RouteFactory get myRoute => (RouteSettings settings) {
             builder: (_) => ForgotPasswordScreen(),
             settings: settings,
           );
-        case UnityMapScreen.routeName:
-          return MyCustomRoute(
-            builder: (_) => UnityMapScreen(
-              distance: double.parse(settings.arguments.toString()),
-            ),
-            settings: settings,
-          );
+        // case UnityMapScreen.routeName:
+          // return MyCustomRoute(
+          //   builder: (_) => UnityMapScreen(
+          //     distance: double.parse(settings.arguments.toString()),
+          //   ),
+          //   settings: settings,
+          // );
         case CommunitySeeAllScreen.routeName:
           final Map? dataArg = settings.arguments as Map;
           return MyCustomRoute(
@@ -198,10 +198,10 @@ RouteFactory get myRoute => (RouteSettings settings) {
           final baseBloc = sl<BaseBloc>();
           if (baseBloc.state.userInfo != null &&
               baseBloc.state.userInfo!.isUser()) {
-            final Map? dataArg = settings.arguments as Map;
+            final Map? dataArg = settings.arguments as Map? ;
             return MyCustomRoute(
               builder: (_) => CommunityWriteReviewPage(
-                id: (dataArg!.containsKey('id') != null ? dataArg.containsKey('id') : false)
+                id: (dataArg!= null && dataArg.containsKey('id') != null ? dataArg.containsKey('id') : false)
                     ? dataArg['id']
                     : null,
               ),
@@ -302,7 +302,7 @@ RouteFactory get myRoute => (RouteSettings settings) {
           );
         case VerifyCodeScreen.routeName:
           var comeFrom = '';
-          final Map? dataArg = settings.arguments as Map;
+          final Map? dataArg = settings.arguments as Map?;
           if (dataArg != null && dataArg.containsKey(RouteArgument.comeFrom)) {
             comeFrom = dataArg[RouteArgument.comeFrom];
           }

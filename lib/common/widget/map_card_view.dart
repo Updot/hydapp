@@ -24,7 +24,7 @@ class MapCardView extends StatelessWidget {
   Widget build(BuildContext context) {
     final _kGooglePlex = CameraPosition(
       target: LatLng(
-          double.parse(locationModel.lat), double.parse(locationModel.long)),
+          double.parse(locationModel.lat??'0'), double.parse(locationModel.long)),
       zoom: 14.4746,
     );
 
@@ -33,7 +33,7 @@ class MapCardView extends StatelessWidget {
     final marker = Marker(
       markerId: markerId,
       position: LatLng(
-        double.parse(locationModel.lat),
+        double.parse(locationModel.lat??'0'),
         double.parse(locationModel.long),
       ),
       infoWindow: InfoWindow(title: locationModel.locationAt, snippet: '*'),

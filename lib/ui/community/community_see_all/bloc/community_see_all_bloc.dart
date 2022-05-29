@@ -22,12 +22,12 @@ class CommunitySeeAllBloc
   ) async* {
     if (event is AddPostToFavorite) {
       if (event.communityPost.isFavorite != null) {
-        event.communityPost.isFavorite = !event.communityPost.isFavorite!;
+        event.communityPost.isFavorite = !event.communityPost.isFavorite;
       }
       yield state.copyWith(timeRefresh: DateTime.now().toIso8601String());
 
       await homeRepository!.addFavorite(event.communityPost.id.toString(),
-          event.communityPost.isFavorite!, FavoriteType.COMMUNITY_POST);
+          event.communityPost.isFavorite, FavoriteType.COMMUNITY_POST);
     }
   }
 }

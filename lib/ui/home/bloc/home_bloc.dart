@@ -72,46 +72,46 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               filterData: state.facilitesId),
           homeRepository!.fetchListCommunity(
               pageIndex: 0,
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               experienceId: state.currentArea!.id.toString(),
               filterData: state.facilitesId),
           assetRepository!.fetchAmenities(
               experiId: state.currentArea!.id.toString(),
               viewAssetType: ViewAssetType.TRENDING_THIS_WEEK,
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               filter: state.facilitesId),
           assetRepository!.fetchAmenities(
               experiId: state.currentArea!.id.toString(),
               viewAssetType: ViewAssetType.TOP_RATE,
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ??{},
               filter: state.facilitesId),
           assetRepository!.fetchAmenities(
               experiId: state.currentArea!.id.toString(),
               viewAssetType: ViewAssetType.RESTAURANTS,
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               filter: state.facilitesId),
           assetRepository!.fetchAmenities(
               experiId: state.currentArea!.id.toString(),
               viewAssetType: ViewAssetType.FACILITIES,
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               filter: state.facilitesId),
           assetRepository!.fetchAmenities(
               experiId: state.currentArea!.id.toString(),
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               viewAssetType: ViewAssetType.ACTIVITIES,
               filter: state.facilitesId),
           assetRepository!.fetchAmenities(
               experiId: state.currentArea!.id.toString(),
               viewAssetType: ViewAssetType.FOOD_TRUCKS,
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               filter: state.facilitesId),
           assetRepository!.fetchAmenities(
               experiId: state.currentArea!.id.toString(),
               viewAssetType: ViewAssetType.MIGHT_LIKE,
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               filter: state.facilitesId),
           eventRepository!.fetchEvent(
-              filterAdv: state.filterOptSelected!,
+              filterAdv: state.filterOptSelected ?? {},
               stateDate:
                   DateUtil.dateFormatDDMMYYYY(DateTime.now(), locale: 'en'),
               endDate: DateUtil.dateFormatDDMMYYYY(
@@ -188,11 +188,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       case AddPostFavorite:
         final ev = event as AddPostFavorite;
         if (ev.communityPost.isFavorite != null) {
-          ev.communityPost.isFavorite = !ev.communityPost.isFavorite!;
+          ev.communityPost.isFavorite = !ev.communityPost.isFavorite;
         }
         yield state.copyWith(timeRefresh: DateTime.now().toIso8601String());
         await homeRepository!.addFavorite(ev.communityPost.id.toString(),
-            ev.communityPost.isFavorite!, FavoriteType.COMMUNITY_POST);
+            ev.communityPost.isFavorite, FavoriteType.COMMUNITY_POST);
         // add(FetchListCommunity());
         break;
       case EstimateDistance:

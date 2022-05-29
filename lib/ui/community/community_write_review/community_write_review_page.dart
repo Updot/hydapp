@@ -46,7 +46,7 @@ class CommunityWriteReviewPageState extends BaseState<CommunityWriteReviewPage>
   final _communityWriteReviewBloc = sl<CommunityWriteReviewBloc>();
   final FocusNode _focusDescription = FocusNode();
   final FocusNode _focusSearch = FocusNode();
-  Completer<List<AssetDetail>>? _controller;
+  Completer<List<AssetDetail?>>? _controller = Completer();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _searchController = TextEditingController();
   double rating = 0.0;
@@ -73,7 +73,7 @@ class CommunityWriteReviewPageState extends BaseState<CommunityWriteReviewPage>
 
     _descriptionController.addListener(_onDescriptionChanged);
     _communityWriteReviewBloc.listen((state) {
-      if (!(_controller!.isCompleted)) {
+      if ( _controller!= null && !_controller!.isCompleted) {
         _controller!.complete(state.listAssetDetail);
       }
       switch (state.currentRoute) {
@@ -181,9 +181,7 @@ class CommunityWriteReviewPageState extends BaseState<CommunityWriteReviewPage>
                             hintText: Lang.asset_detail_try_starbucks.tr(),
                             prefixIcon: const Icon(Icons.search),
                             suffixIcon: GestureDetector(
-                              onTap: () {
-                                onClearText();
-                              },
+                              onTap: onClearText,
                               child: const Icon(Icons.clear),
                             ),
                           ),
@@ -196,7 +194,7 @@ class CommunityWriteReviewPageState extends BaseState<CommunityWriteReviewPage>
                           return _controller!.future;
                         },
                         getImmediateSuggestions: true,
-                        itemBuilder: (context, AssetDetail item) {
+                        itemBuilder: (context, AssetDetail? item) {
                           return Column(
                             children: [
                               Padding(
@@ -224,12 +222,12 @@ class CommunityWriteReviewPageState extends BaseState<CommunityWriteReviewPage>
                                         shape: BoxShape.circle,
                                       ),
                                       child: UIUtil.makeCircleImageWidget(
-                                          item.thumb!.url ?? Res.img_temp_05,
+                                          item?.thumb?.url ?? Res.img_temp_05,
                                           size: sizeNormal),
                                     ),
                                     Expanded(
                                       child: MyTextView(
-                                        text: item.title,
+                                        text: item?.title,
                                         maxLine: 2,
                                         textAlign: TextAlign.start,
                                         textStyle: textSmallxx.copyWith(
@@ -758,7 +756,7 @@ class CommunityWriteReviewPageState extends BaseState<CommunityWriteReviewPage>
     _searchController.dispose();
     _focusSearch.dispose();
     _focusDescription.dispose();
-    timeDelay!.cancel();
+    timeDelay?.cancel();
     _communityWriteReviewBloc.close();
     super.dispose();
   }

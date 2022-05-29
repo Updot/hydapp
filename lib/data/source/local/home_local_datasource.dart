@@ -63,20 +63,13 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
 
   @override
   WeatherInfo? getWeatherInfo() {
-    try {
+
       final jsonString = appPreferences.getWeatherInfo();
       if (jsonString != null) {
         return WeatherInfo.fromJson(json.decode(jsonString));
       } else {
         return null;
       }
-    } on Exception catch (exception) {
-      print(exception);
-      return null;
-    } catch (error) {
-      print(error);
-      return null;
-    }
   }
 
   @override

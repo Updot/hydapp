@@ -88,11 +88,11 @@ class SaveItemPageState extends BaseState<SaveItemPage> {
                 child: BlocBuilder<SaveItemBloc, SaveItemState>(
                     builder: (context, state) {
                   final len =
-                      state.groupSaveItems![state.currentAreaId]!.length;
+                      state.groupSaveItems[state.currentAreaId]?.length;
                   return Column(
                     children: [
                       categoriesRender(state),
-                      if (len <= 0)
+                      if (len != null && len <= 0)
                         SearchEmptyWidget(
                           justInformEmpty: true,
                           keyWord: '',
@@ -110,7 +110,7 @@ class SaveItemPageState extends BaseState<SaveItemPage> {
                             scrollDirection: Axis.vertical,
                             itemBuilder: (BuildContext context, int index) {
                               final e = state
-                                  .groupSaveItems![state.currentAreaId]![index];
+                                  .groupSaveItems[state.currentAreaId]?[index];
                               return TweenAnimationBuilder(
                                   tween: Tween<double>(begin: 0, end: 1),
                                   duration:

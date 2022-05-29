@@ -57,7 +57,7 @@ class CommunityShareCard extends StatelessWidget {
                         padding: const EdgeInsets.all(sizeSmall),
                         child: Icon(
                           Icons.favorite,
-                          color: state!.postDetail!.isFavorite!
+                          color: state!.postDetail!.isFavorite
                               ? Colors.red
                               : Colors.grey[350],
                           size: sizeSmallxxxx,
@@ -165,8 +165,8 @@ class CommunityShareCard extends StatelessWidget {
   }
 
   Widget renderItemLocationTag() {
-    final assetDetail = state!.postDetail!.place;
-    final totalReviews = assetDetail!.totalReview;
+    final assetDetail = state?.postDetail?.place;
+    final totalReviews = assetDetail?.totalReview;
     return AspectRatio(
       aspectRatio: 3.2,
       child: Padding(
@@ -191,10 +191,10 @@ class CommunityShareCard extends StatelessWidget {
                     const BorderRadius.all(Radius.circular(sizeVerySmall)),
                 child: GestureDetector(
                   onTap: () {
-                    onClickAmenity!(assetDetail);
+                    onClickAmenity!(assetDetail!);
                   },
                   child: UIUtil.makeImageWidget(
-                      assetDetail.image!.url ?? Res.image_lorem,
+                      assetDetail?.image!.url ?? Res.image_lorem,
                       boxFit: BoxFit.cover,
                       width: sizeExLargexx,
                       height: sizeImageSmall),
@@ -212,7 +212,7 @@ class CommunityShareCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: MyTextView(
-                              text: assetDetail.title,
+                              text: assetDetail?.title,
                               maxLine: 1,
                               textAlign: TextAlign.start,
                               textStyle: textSmallx.copyWith(
@@ -224,13 +224,13 @@ class CommunityShareCard extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              onClickFavoriteAmenity!(assetDetail);
+                              onClickFavoriteAmenity!(assetDetail!);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(sizeVerySmall),
                               child: Icon(
                                 Icons.favorite,
-                                color: (assetDetail.isFavorite!)
+                                color: (assetDetail != null && assetDetail.isFavorite)
                                     ? Colors.red
                                     : Colors.grey[350],
                                 size: sizeSmallxxx,
@@ -239,7 +239,7 @@ class CommunityShareCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      (assetDetail.eta != null)
+                      (assetDetail?.eta != null)
                           ? Row(
                               children: [
                                 Icon(
@@ -250,7 +250,7 @@ class CommunityShareCard extends StatelessWidget {
                                 const SizedBox(width: sizeVerySmall),
                                 Expanded(
                                   child: MyTextView(
-                                    text: assetDetail.eta,
+                                    text: assetDetail?.eta,
                                     textAlign: TextAlign.start,
                                     textStyle: textSmall.copyWith(
                                       color: Colors.grey[350],
@@ -272,7 +272,7 @@ class CommunityShareCard extends StatelessWidget {
                                 const SizedBox(width: sizeVerySmall),
                                 Expanded(
                                   child: MyTextView(
-                                    text: assetDetail.etaCar,
+                                    text: assetDetail?.etaCar,
                                     textAlign: TextAlign.start,
                                     textStyle: textSmall.copyWith(
                                       color: Colors.grey[350],
@@ -304,7 +304,7 @@ class CommunityShareCard extends StatelessWidget {
                                   color: Color(0xffFBBC43),
                                 ),
                                 MyTextView(
-                                  text: assetDetail.rate ?? '..',
+                                  text: assetDetail?.rate ?? '..',
                                   textStyle: textSmall.copyWith(
                                       fontFamily: MyFontFamily.graphik,
                                       fontWeight: MyFontWeight.medium),

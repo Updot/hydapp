@@ -277,14 +277,14 @@ class PostRepositoryImpl extends Repository implements PostRepository {
 
   Future<String> _estimateTime(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation?.lat ?? '0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return Utils.etaWalkingTime(distance);
   }
 
   Future<String> _estimateTimeCar(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation?.lat ?? '0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return Utils.etaWalkingTimeCar(distance);
   }

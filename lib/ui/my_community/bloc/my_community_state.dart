@@ -41,9 +41,9 @@ class MyCommunityState extends Equatable {
 
   @override
   List<Object> get props => [
-        listUserCommunityModel!,
-        refreshTime!,
-        userInfo!,
+        listUserCommunityModel ?? '',
+        refreshTime ?? '',
+        userInfo ?? '',
       ];
 
   @override

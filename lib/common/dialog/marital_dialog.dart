@@ -10,7 +10,7 @@ import 'normal_dialog_template.dart';
 class MaritalDialog extends StatelessWidget {
   final List<MaritalStatus> listMarital;
   final Function(MaritalStatus) onSelectMarital;
-  final MaritalStatus maritalSelected;
+  final MaritalStatus? maritalSelected;
 
   MaritalDialog(
       {required this.listMarital,

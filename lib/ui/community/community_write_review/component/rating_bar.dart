@@ -243,7 +243,7 @@ class _RatingBarState extends State<RatingBar> {
 
   Widget _buildRating(BuildContext context, int index) {
     final ratingWidget = widget._ratingWidget;
-    final item = widget._itemBuilder!.call(context, index);
+    final item = widget._itemBuilder?.call(context, index);
     final ratingOffset = widget.allowHalfRating ? 0.5 : 1.0;
 
     Widget _ratingWidget;

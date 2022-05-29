@@ -236,7 +236,8 @@ class UserRepositoryImpl extends Repository implements UserRepository {
     print("AAAAAAAA 1");
     final userInfo = localDataSrc.getCurrentUser();
     print("AAAAAAAA 2");
-    remoteDataSource.updateUserToken(localDataSrc.getAccessToken()!);
+    remoteDataSource.updateUserToken(localDataSrc.getAccessToken()??'');
+    print("AAAAAAAA 3");
     return userInfo;
   }
 

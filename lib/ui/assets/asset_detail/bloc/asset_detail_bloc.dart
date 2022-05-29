@@ -41,19 +41,19 @@ class AssetDetailBloc extends Bloc<AssetDetailEvent, AssetDetailState> {
       yield state.copyWith(isRefreshing: true);
     } else if (event is AddPostFavorite) {
       if (event.communityPost.isFavorite != null) {
-        event.communityPost.isFavorite = !event.communityPost.isFavorite!;
+        event.communityPost.isFavorite = !event.communityPost.isFavorite;
       }
       // yield state.copyWith(timeRefresh: DateTime.now().toIso8601String());
       await homeRepository!.addFavorite(event.communityPost.id.toString(),
-          event.communityPost.isFavorite!, FavoriteType.COMMUNITY_POST);
+          event.communityPost.isFavorite, FavoriteType.COMMUNITY_POST);
     } else if (event is AddFavorite) {
       if (state.assetDetail!.isFavorite != null) {
-        state.assetDetail!.isFavorite = !state.assetDetail!.isFavorite!;
+        state.assetDetail!.isFavorite = !state.assetDetail!.isFavorite;
       }
       // yield state.copyWith(timeRefresh: DateTime.now().toIso8601String());
 
       await homeRepository!.addFavorite(
-          event.id!, state.assetDetail!.isFavorite!, FavoriteType.AMENITY);
+          event.id!, state.assetDetail!.isFavorite, FavoriteType.AMENITY);
 
       // add(FetchAssetDetail(event.id));
       // add(FetchAlsoLike(event.id));

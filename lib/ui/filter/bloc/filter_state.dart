@@ -5,7 +5,7 @@ import '../../../data/model/area_item.dart';
 
 @immutable
 class FilterState extends Equatable {
-  final Map<int, Map>? filterOptSelected;
+  final Map<int, Map> filterOptSelected;
   final AreaItem? areaItem;
 
   FilterState({
@@ -15,8 +15,8 @@ class FilterState extends Equatable {
 
   @override
   List<Object> get props => [
-        filterOptSelected!,
-        areaItem!,
+        filterOptSelected,
+        areaItem ?? '',
       ];
 
   factory FilterState.initial() {
@@ -31,7 +31,7 @@ class FilterState extends Equatable {
   }) {
     return FilterState(
       areaItem: areaItem ?? this.areaItem,
-      filterOptSelected: filterOptSelected!,
+      filterOptSelected: filterOptSelected ?? {},
     );
   }
 
@@ -44,9 +44,9 @@ class FilterState extends Equatable {
 
   FilterState clearOption({int? fid}) {
     Map<int, Map>? mapFilter;
-    if (filterOptSelected!.containsKey(fid)) {
+    if (filterOptSelected.containsKey(fid)) {
       mapFilter = {};
-      mapFilter.addAll(filterOptSelected!);
+      mapFilter.addAll(filterOptSelected);
       mapFilter.remove(fid);
     }
     return FilterState(

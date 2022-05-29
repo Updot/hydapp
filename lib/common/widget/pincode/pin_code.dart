@@ -224,7 +224,7 @@ class _PinCodeState extends State<PinCode> with SingleTickerProviderStateMixin {
     _focusNode!.addListener(() {
       setState(() {});
     }); // Rebuilds on every change to reflect the correct color on each field.
-    _inputList = widget.length as List<String>;
+    _inputList = List<String>.generate(widget.length, (index) => '');
     _initializeValues();
     _controller = AnimationController(
       duration: Duration(milliseconds: widget.errorAnimationDuration),
@@ -332,7 +332,7 @@ class _PinCodeState extends State<PinCode> with SingleTickerProviderStateMixin {
       // }
     }
 
-    _errorAnimationSubscription!.cancel();
+    _errorAnimationSubscription?.cancel();
 
     _controller!.dispose();
     super.dispose();
@@ -550,7 +550,7 @@ class _PinCodeState extends State<PinCode> with SingleTickerProviderStateMixin {
   }
 
   Future<void> _setTextToInput(String data) async {
-    final replaceInputList = widget.length as List<String>;
+    final replaceInputList =  List<String>.generate(widget.length, (index) => '');
 
     for (var i = 0; i < widget.length; i++) {
       replaceInputList[i] = data.length > i ? data[i] : '';

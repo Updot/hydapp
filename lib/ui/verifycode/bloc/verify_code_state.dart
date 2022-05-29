@@ -2,7 +2,7 @@ part of 'verify_code_bloc.dart';
 
 @immutable
 class VerifyCodeState extends Equatable {
-  final String? tokenCode;
+  final String tokenCode;
   final int? timeResend;
   final UserInfo? userInfo;
   final bool? isLogout;
@@ -11,7 +11,7 @@ class VerifyCodeState extends Equatable {
   final String? email;
 
   VerifyCodeState({
-    this.tokenCode,
+    required this.tokenCode,
     this.timeResend,
     this.userInfo,
     this.isLogout,
@@ -23,7 +23,7 @@ class VerifyCodeState extends Equatable {
   factory VerifyCodeState.initial(
       {String? email, int? timeResendInit, UserInfo? userInfo}) {
     return VerifyCodeState(
-        email: email, timeResend: timeResendInit, userInfo: userInfo);
+        email: email, timeResend: timeResendInit, userInfo: userInfo, tokenCode: '');
   }
   VerifyCodeState countDown() {
     return copyWith(timeResend: max(0, timeResend! - 1));
@@ -59,12 +59,12 @@ class VerifyCodeState extends Equatable {
 
   @override
   List<Object> get props => [
-        tokenCode!,
-        timeResend!,
-        errMessage!,
-        email!,
-        verifyCodeStatus!,
-        isLogout!
+        tokenCode ,
+        timeResend?? '',
+        errMessage?? '',
+        email?? '',
+        verifyCodeStatus ?? '',
+        isLogout?? ''
       ];
 
   @override

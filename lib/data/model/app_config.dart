@@ -15,7 +15,7 @@ class AppConfig {
   AppConfig(
       {int? appVersionCode,
       int? defaultDistanceNearby,
-      List<MaritalStatus>? maritalStatus}) {
+      List<MaritalStatus>? maritalStatus }) {
     defaultDistanceNearby = defaultDistanceNearby;
     appVersionCode = appVersionCode;
     maritalStatus = maritalStatus;

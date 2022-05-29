@@ -69,12 +69,12 @@ class HelpPageState extends BaseState<HelpPage> {
     _helpBloc.add(LoadCountryCode());
     _helpBloc.listen((state) {
   _pbLoading!.close();
-  if (state.isSuccess!) {
+  if (state.isSuccess) {
   // UIUtil.showToast(Lang.help_your_form_is_successfully_submitted.tr());
   NavigateUtil.replacePage(
   context, CongratulationRegisterScreen.routeName,
   argument: {'type': CongratulationEnum.HELP});
-  } else if (state.isError!) {
+  } else if (state.isError) {
   NavigateUtil.replacePage(
   context, CongratulationRegisterScreen.routeName,
   argument: {'type': CongratulationEnum.ERROR});
@@ -164,7 +164,7 @@ class HelpPageState extends BaseState<HelpPage> {
           const SizedBox(height: sizeSmallxxx),
           PhoneNumberFormField(
             focusNode: _focusPhone,
-            text: state.countrySelected!.dialCode,
+            text: state.countrySelected?.dialCode,
             onPressCountryCode: () => onPressCountryCode(context, state),
             autoValidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.phone,
@@ -292,8 +292,8 @@ class HelpPageState extends BaseState<HelpPage> {
       showDialog(
         context: context,
         builder: (BuildContext context) => CountryDialog(
-          listCountry: state.listCountry!,
-          countrySelected: state.countrySelected!,
+          listCountry: state.listCountry?? [],
+          countrySelected: state.countrySelected ,
           onSelectCountry: onSelectCountry,
         ),
       );

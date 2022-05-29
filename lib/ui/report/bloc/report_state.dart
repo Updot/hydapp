@@ -5,8 +5,8 @@ class ReportState extends Equatable {
   final Map<String, Map>? listImageSelected;
   final List<HelpReportModel>? reportItems;
   final HelpReportModel? issueSelected;
-  final bool? isSuccessReport;
-  final bool? isError;
+  final bool isSuccessReport;
+  final bool isError;
   final bool? isDesValid;
 
   ReportState(
@@ -14,8 +14,8 @@ class ReportState extends Equatable {
       this.issueSelected,
       this.isDesValid,
       this.reportItems,
-      this.isSuccessReport,
-      this.isError});
+      this.isSuccessReport = false,
+      this.isError = false});
 
   factory ReportState.initial(
     ConfigRepository configRepository,
@@ -47,19 +47,19 @@ class ReportState extends Equatable {
       issueSelected: issueSelected ?? this.issueSelected,
       reportItems: reportItems ?? this.reportItems,
       isDesValid: isDesValid ?? this.isDesValid,
-      isSuccessReport: isSuccessReport,
-      isError: isError,
+      isSuccessReport: isSuccessReport ?? this.isSuccessReport,
+      isError: isError ?? this.isError,
     );
   }
 
   @override
   List<Object> get props => [
-        listImageSelected!,
-        issueSelected!,
-        isDesValid!,
-        isError!,
-        reportItems!,
-        isSuccessReport!,
+        listImageSelected ?? '',
+        issueSelected ?? '',
+        isDesValid ?? '',
+        isError ,
+        reportItems?? '',
+        isSuccessReport ,
       ];
 
   @override

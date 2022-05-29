@@ -124,7 +124,7 @@ class _CommentDialogState extends State<CommentDialog> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 UIUtil.makeCircleImageWidget(
-                                    state.userInfo!.photo.url!,
+                                    state.userInfo!.photo!.url!,
                                     initialName: state.userInfo!.fullName,
                                     size: sizeNormalxxx),
                                 Expanded(

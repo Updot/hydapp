@@ -93,10 +93,10 @@ class NotificationHistoryScreenState
                 onRefresh: () {
                   _notificationHistoryBloc.add(FetchNotificationData());
                 },
-                listView: ListView.builder(
+                listView:state.notificationItemHistoryList != null ? ListView.builder(
                   padding: const EdgeInsets.only(
                       left: sizeSmallxxx, right: sizeSmallxxx),
-                  itemCount: state.notificationItemHistoryList!.length,
+                  itemCount: state.notificationItemHistoryList?.length,
                   itemBuilder: (context, position) {
                     return TweenAnimationBuilder(
                         tween: Tween<double>(begin: 0, end: 1),
@@ -111,7 +111,7 @@ class NotificationHistoryScreenState
                           );
                         });
                   },
-                ),
+                ) : SizedBox(),
               );
             }),
           ),

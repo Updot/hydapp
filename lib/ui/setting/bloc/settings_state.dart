@@ -48,8 +48,8 @@ class SettingsState extends Equatable {
     StaticContentRepository staticContentRepository,
   ) {
     final notificationItemList =
-        notificationRepository.getLocalListNotificationItems();
-    final notificationSettingModel = notificationItemList!
+        notificationRepository.getLocalListNotificationItems() ?? [];
+    final notificationSettingModel = notificationItemList
         .firstWhere((element) => element.status == 1, orElse: () {
       return NotificationSettingModel();
     });
@@ -85,7 +85,7 @@ class SettingsState extends Equatable {
         isAppleMapEnable: isAppleMapEnable ?? this.isAppleMapEnable,
         isGoogleMapEnable: isGoogleMapEnable ?? this.isGoogleMapEnable,
         isWazeMapEnable: isWazeMapEnable ?? this.isWazeMapEnable,
-        filterOptSelected: filterOptSelected!,
+        filterOptSelected: filterOptSelected,
         success: success ?? this.success,
         refreshTime: refreshTime ?? this.refreshTime,
         staticContent: staticContent ?? this.staticContent,
@@ -104,18 +104,18 @@ class SettingsState extends Equatable {
 
   @override
   List<Object> get props => [
-        filterOptSelected!,
-        notificationItemList!,
-        success!,
-        isWazeMapEnable!,
-        isGoogleMapEnable!,
-        refreshTime!,
-        isAppleMapEnable!,
-        userInfo!,
-        staticContent!,
-        isNotification!,
-        errorMessage!,
-        arrLanguage!,
+        filterOptSelected ?? {},
+        notificationItemList ?? [],
+        success ?? '',
+        isWazeMapEnable ?? '',
+        isGoogleMapEnable ?? '',
+        refreshTime ?? '',
+        isAppleMapEnable ?? '',
+        userInfo ?? '',
+        staticContent ?? '',
+        isNotification ?? '',
+        errorMessage ?? '',
+        arrLanguage ?? '',
       ];
 
   @override

@@ -71,7 +71,7 @@ class _MyInputFieldState extends State<MyInputField> {
           padding: const EdgeInsets.all(sizeVerySmall),
           decoration: BoxDecoration(
               boxShadow: [
-                widget.focusNode!.hasFocus
+                widget.focusNode?.hasFocus !=null &&   widget.focusNode!.hasFocus
                     ? BoxShadow(
                         color: const Color(0xffFDCB6B).withOpacity(0.5),
                         spreadRadius: 0.5,
@@ -123,7 +123,7 @@ class _MyInputFieldState extends State<MyInputField> {
               disabledBorder: InputBorder.none,
               labelText: widget.textHint,
               labelStyle: textSmallxx.copyWith(
-                color: (widget.focusNode!.hasFocus)
+                color: ( widget.focusNode != null && widget.focusNode!.hasFocus)
                     ? const Color(0xffFDCB6B)
                     : const Color(0x32212237),
               ),

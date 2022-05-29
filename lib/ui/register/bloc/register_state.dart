@@ -2,22 +2,22 @@ part of 'register_bloc.dart';
 
 @immutable
 class RegisterState extends Equatable {
-  final bool? isFirstNameValid;
-  final bool? isLastNameValid;
-  final bool? isEmailValid;
-  final bool? isPhoneValid;
-  final bool? isPasswordValid;
-  final int? hasSocialEmail;
-  final bool? isPasswordMatched;
-  final bool? hasUppercase;
-  final bool? hasDigits;
-  final bool? hasSpaceCharacters;
-  final bool? hasSpecialCharacters;
-  final bool? hasMinLength;
-  final List<MaritalStatus>? listMarital;
-  final MaritalStatus? maritalStatusSelected;
+  final bool isFirstNameValid;
+  final bool isLastNameValid;
+  final bool isEmailValid;
+  final bool isPhoneValid;
+  final bool isPasswordValid;
+  final int hasSocialEmail;
+  final bool isPasswordMatched;
+  final bool hasUppercase;
+  final bool hasDigits;
+  final bool hasSpaceCharacters;
+  final bool hasSpecialCharacters;
+  final bool hasMinLength;
+  final List<MaritalStatus> listMarital;
+  final MaritalStatus maritalStatusSelected;
   final RegisterRoute? currentRoute;
-  final bool? ableToRegister;
+  final bool ableToRegister;
   final RegisterStatus? registerStatus;
   final String? tokenCode;
   final int? timeResend;
@@ -29,28 +29,28 @@ class RegisterState extends Equatable {
   final UserInfo? userInfo;
 
   RegisterState({
-    @required this.isEmailValid,
-    @required this.isFirstNameValid,
-    @required this.isLastNameValid,
-    @required this.isPhoneValid,
+    required this.isEmailValid,
+    required this.isFirstNameValid,
+    required this.isLastNameValid,
+    required this.isPhoneValid,
     @required this.selectedDate,
-    @required this.hasSocialEmail,
-    @required this.listMarital,
-    @required this.maritalStatusSelected,
-    @required this.isPasswordValid,
-    @required this.isPasswordMatched,
+    required this.hasSocialEmail,
+    required this.listMarital,
+     required this.maritalStatusSelected,
+    required this.isPasswordValid,
+    required this.isPasswordMatched,
     @required this.userInfo,
     @required this.currentRoute,
     this.tokenCode,
-    this.hasUppercase,
-    this.hasDigits,
-    this.hasSpecialCharacters,
-    this.hasSpaceCharacters,
-    this.hasMinLength,
+    required this.hasUppercase,
+    required this.hasDigits,
+    required this.hasSpecialCharacters,
+    required this.hasSpaceCharacters,
+    required this.hasMinLength,
     this.timeResend,
     this.email,
     this.errMessage,
-    this.ableToRegister,
+    required this.ableToRegister,
     this.countrySelected,
     this.listCountry,
     this.registerStatus,
@@ -64,7 +64,7 @@ class RegisterState extends Equatable {
       maritalStatusSelected: configRepository.getAppConfig()!.maritalStatus![0],
       selectedDate: null,
       hasSocialEmail: 0,
-      listMarital: configRepository.getAppConfig()!.maritalStatus,
+      listMarital: configRepository.getAppConfig()!.maritalStatus!,
       isEmailValid: true,
       isPhoneValid: true,
       currentRoute: RegisterRoute.enterInformationForm,
@@ -139,14 +139,14 @@ class RegisterState extends Equatable {
       hasSpaceCharacters: hasSpaceCharacters ?? this.hasSpaceCharacters,
       hasMinLength: hasMinLength ?? this.hasMinLength,
       ableToRegister: isRegisterAble(
-          isFirstNameValid ?? this.isFirstNameValid!,
-          isLastNameValid ?? this.isLastNameValid!,
-          selectedDate ?? this.selectedDate!,
+          isFirstNameValid ?? this.isFirstNameValid,
+          isLastNameValid ?? this.isLastNameValid,
+          selectedDate ?? this.selectedDate ?? DateTime.now(),
           // isPhoneValid ?? this.isPhoneValid,
-          maritalStatusSelected!,
-          isEmailValid ?? this.isEmailValid!,
-          isPasswordValid ?? this.isPasswordValid!,
-          isPasswordMatched ?? this.isPasswordMatched!),
+          maritalStatusSelected ?? this.maritalStatusSelected,
+          isEmailValid ?? this.isEmailValid,
+          isPasswordValid ?? this.isPasswordValid,
+          isPasswordMatched ?? this.isPasswordMatched),
       countrySelected: selectedCountry ?? countrySelected,
       listCountry: listCountry ?? this.listCountry,
     );
@@ -195,6 +195,11 @@ class RegisterState extends Equatable {
       ableToRegister: ableToRegister,
       registerStatus: status,
       currentRoute: currentRoute,
+      hasDigits: hasDigits,
+      hasMinLength: hasMinLength,
+      hasUppercase: hasUppercase,
+      hasSpaceCharacters: hasSpaceCharacters,
+      hasSpecialCharacters: hasSpecialCharacters,
     );
   }
 
@@ -220,35 +225,40 @@ class RegisterState extends Equatable {
       timeResend: timeResend,
       errMessage: mess,
       currentRoute: currentRoute,
+      hasDigits: false,
+      hasMinLength: hasMinLength,
+      hasUppercase: hasUppercase,
+      hasSpaceCharacters: hasSpaceCharacters,
+      hasSpecialCharacters: hasSpecialCharacters,
     );
   }
 
   @override
   List<Object> get props => [
-        isFirstNameValid!,
-        isLastNameValid!,
-        isEmailValid!,
-        isPhoneValid!,
-        isPasswordValid!,
-        ableToRegister!,
-        isPasswordMatched!,
-        maritalStatusSelected!,
-        currentRoute!,
-        hasSocialEmail!,
-        timeResend!,
-        tokenCode!,
-        email!,
-        errMessage!,
-        hasUppercase!,
-        hasDigits!,
-        hasSpecialCharacters!,
-        hasSpaceCharacters!,
-        hasMinLength!,
-        selectedDate!,
-        userInfo!,
-        registerStatus!,
-        listCountry!,
-        countrySelected!,
+        isFirstNameValid,
+        isLastNameValid,
+        isEmailValid,
+        isPhoneValid,
+        isPasswordValid,
+        ableToRegister,
+        isPasswordMatched,
+        maritalStatusSelected,
+        currentRoute ?? '',
+        hasSocialEmail,
+        timeResend ?? '',
+        tokenCode ?? '',
+        email ?? '',
+        errMessage ?? '',
+        hasUppercase,
+        hasDigits,
+        hasSpecialCharacters,
+        hasSpaceCharacters,
+        hasMinLength,
+        selectedDate ?? '',
+        userInfo ?? '',
+        registerStatus ?? '',
+        listCountry ?? '',
+        countrySelected?? '',
       ];
 
   @override

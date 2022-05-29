@@ -53,8 +53,8 @@ class UserInfo {
 
   dynamic get isActive => _isActive;
   set isActive(dynamic isActive) => _isActive = isActive;
-  ImageInfoData get photo => _photo!;
-  set photo(ImageInfoData photo) => _photo = photo;
+  ImageInfoData? get photo => _photo;
+  set photo(ImageInfoData? photo) => _photo = photo;
   String get phoneNumber => _phoneNumber!;
   set phoneNumber(String phoneNumber) => _phoneNumber = phoneNumber;
   String get fullName => _fullName!;
@@ -83,6 +83,7 @@ class UserInfo {
       if (json['photo'] != null && json['photo'] is Map) {
         _photo = ImageInfoData.fromJson(json['photo']);
       }
+      print("############Marital${json['marital_status']}");
       _phoneNumber = json['phone_number'];
       _isActive = json['is_active'];
       _email = json['email'];

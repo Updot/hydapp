@@ -50,7 +50,7 @@ class StartedScreenState extends BaseState<StartedScreen>
     initBasicInfo();
     _startedBloc.listen((state) {
       _pbLoading!.close();
-      if (state is StartedState && state.guestLoginSuccess!) {
+      if (state is StartedState && state.guestLoginSuccess) {
         NavigateUtil.openPage(context, MainScreen.routeName);
       }
     });
@@ -238,7 +238,7 @@ class StartedScreenState extends BaseState<StartedScreen>
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: MyTextView(
-                      text: buildVersion,
+                      text: buildVersion ?? '',
                       textStyle:
                           textSmallxx.copyWith(fontWeight: MyFontWeight.black),
                     ),

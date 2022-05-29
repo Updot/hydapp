@@ -130,8 +130,8 @@ class UniLinkWrapper {
     return _latestLink!;
   }
 
-  Uri getUri() {
-    return _initialUri!;
+  Uri? getUri() {
+    return _initialUri;
   }
 
   static bool handleDirectLink({

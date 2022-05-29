@@ -92,12 +92,10 @@ class CommunityDetailScreenState extends BaseState<CommunityDetailScreen> {
       create: (_) => _communityDetailBloc,
       child: BlocBuilder<CommunityDetailBloc, CommunityDetailState>(
           builder: (context, state) {
-        var totalImage = state.postDetail!.image!.length != null
-            ? state.postDetail!.image!.length
-            : 0;
+        var totalImage = state.postDetail?.image?.length ?? 0;
 
         ///get Amenity Image if post dont have image
-        final amenityImage = state.postDetail!.place!.image;
+        final amenityImage = state.postDetail!.place?.image;
         if (totalImage == 0 && amenityImage != null) {
           state.postDetail!.image!.add(amenityImage);
           totalImage = 1;
@@ -264,9 +262,10 @@ class CommunityDetailScreenState extends BaseState<CommunityDetailScreen> {
                 ),
               ),
             ),
+            if(state.postDetail!.author !=null)
             Container(
                 child: UIUtil.makeCircleImageWidget(
-                    state.postDetail!.author!.photo!,
+                    state.postDetail!.author!.photo ?? '',
                     initialName: state.postDetail!.author!.username,
                     size: sizeNormalxxx)),
             GestureDetector(

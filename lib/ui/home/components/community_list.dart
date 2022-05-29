@@ -203,7 +203,7 @@ class CardCommunityItem extends StatelessWidget {
                                     padding: const EdgeInsets.all(sizeSmall),
                                     child: Icon(
                                       Icons.favorite,
-                                      color: (communityInfo!.isFavorite!)
+                                      color: (communityInfo!.isFavorite)
                                           ? Colors.red
                                           : Colors.grey[350],
                                       size: sizeNormal,

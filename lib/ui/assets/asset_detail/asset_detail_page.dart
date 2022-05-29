@@ -92,7 +92,7 @@ class AssetDetailScreenState extends BaseState<AssetDetailScreen> {
           create: (_) => _assetDetailBloc,
           child: BlocBuilder<AssetDetailBloc, AssetDetailState>(
               builder: (context, state) {
-            if (state.assetDetail == null || state.isRefreshing!) {
+            if (state.assetDetail == null || state.isRefreshing) {
               return SafeArea(
                 child: Center(
                   child: Shimmer.fromColors(
@@ -358,7 +358,7 @@ class AssetDetailScreenState extends BaseState<AssetDetailScreen> {
                                             );
                                           }),
                                     const SizedBox(height: sizeNormal),
-                                    if (state.alsoLikeAssets!.isNotEmpty)
+                                    if (state.alsoLikeAssets.isNotEmpty)
                                       ShortListAssets(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: sizeSmall),
@@ -377,7 +377,8 @@ class AssetDetailScreenState extends BaseState<AssetDetailScreen> {
                                 ),
                               ),
                             ),
-                            if (state.assetDetail!.thumb!.url!.isNotEmpty)
+                            if (state.assetDetail!.thumb != null &&
+                                state.assetDetail!.thumb!.url!.isNotEmpty)
                               Positioned.fill(
                                   right: sizeNormalxx,
                                   child: Align(
@@ -458,8 +459,7 @@ class AssetDetailScreenState extends BaseState<AssetDetailScreen> {
                                           child: Icon(
                                             Icons.favorite,
                                             color:
-                                                state.assetDetail!.isFavorite ??
-                                                        false
+                                                state.assetDetail!.isFavorite
                                                     ? Colors.red
                                                     : Colors.white,
                                             size: sizeNormal,
@@ -489,7 +489,7 @@ class AssetDetailScreenState extends BaseState<AssetDetailScreen> {
       locationModel: locationModel,
       markers: [
         {
-          'latitude': double.tryParse(locationModel.lat),
+          'latitude': double.tryParse(locationModel.lat ?? '0'),
           'longitude': double.tryParse(locationModel.long)
         },
       ],

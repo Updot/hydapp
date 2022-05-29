@@ -9,15 +9,16 @@ import '../data/source/local/prefs/app_preferences.dart';
 class LocationWrapper {
   final location = Location();
   final appPre = sl<AppPreferences>();
-  StreamController<LocationData>? _streamController;
+  StreamController<LocationData> _streamController =
+      StreamController<LocationData>();
   LocationData? _locationData;
 
   void init() {
-    location.changeSettings(distanceFilter: 30);
+    // location.changeSettings(distanceFilter: 30);
     location.onLocationChanged.listen((LocationData currentLocation) async {
       _locationData = currentLocation;
-      if (!(_streamController!.isClosed)) {
-        _streamController!.sink.add(currentLocation);
+      if (!_streamController.isClosed) {
+        _streamController.sink.add(currentLocation);
       }
     });
   }
@@ -65,7 +66,9 @@ class LocationWrapper {
   Future<LocationData?> locationData() async {
     final _serviceEnabled = await location.serviceEnabled();
     if (_serviceEnabled) {
-      final locationData = await location.getLocation();
+      print('berfore get location');
+      final LocationData locationData = await location.getLocation();
+      print('LocationData ###########$locationData');
       if (locationData != null) {
         _locationData = locationData;
         final Map mapLocation = <String, double>{
@@ -74,7 +77,8 @@ class LocationWrapper {
         };
         appPre.saveMyLocation(json.encode(mapLocation));
         return locationData;
-      } else {
+      }
+      else {
         final hasCache = appPre.getMyLocation();
         if (hasCache != null && hasCache.isNotEmpty) {
           try {
@@ -105,14 +109,14 @@ class LocationWrapper {
   }
 
   Future<void> addListener(StreamController streamController) async {
-    _streamController = streamController as StreamController<LocationData>?;
+    _streamController = (streamController as StreamController<LocationData>?)!;
     final hasCache = appPre.getMyLocation();
     if (hasCache != null && hasCache.isNotEmpty) {
       try {
         final Map data = json.decode(hasCache) as Map;
         final mapLocation =
             data.map((key, value) => MapEntry<String, double>(key, value));
-        _streamController!.sink.add(LocationData.fromMap(mapLocation));
+        _streamController.sink.add(LocationData.fromMap(mapLocation));
       } catch (ex) {
         print('Convert Location fail' + ex.toString());
       }

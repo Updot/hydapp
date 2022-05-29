@@ -92,7 +92,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         } else if (state is HomeSearchDisplayed) {
           var recentToday = <RecentModel>[];
           var recentYesterday = <RecentModel>[];
-          if (state.recentModels!.isNotEmpty) {
+          if (state.recentModels != null && state.recentModels!.isNotEmpty) {
             recentToday = state.recentTodayModels!;
             recentYesterday = state.recentYesModels!;
           }

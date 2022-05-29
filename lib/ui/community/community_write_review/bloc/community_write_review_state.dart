@@ -48,12 +48,12 @@ class CommunityWriteReviewState extends Equatable {
 
   @override
   List<Object> get props => [
-        currentRoute!,
-        listImageSelected!,
-        timeRefresh!,
-        listAssetDetail!,
-        isFocusFieldSearch!,
-        selectedAssetDetail!
+        currentRoute ?? '',
+        listImageSelected ?? '',
+        timeRefresh?? '',
+        listAssetDetail ?? '',
+        isFocusFieldSearch ?? '',
+        selectedAssetDetail ?? ''
       ];
 
   @override

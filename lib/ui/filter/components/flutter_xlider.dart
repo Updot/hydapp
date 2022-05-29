@@ -382,7 +382,7 @@ class _FlutterSliderState extends State<FlutterSlider>
         Tween(begin: 1.0, end: widget.handlerAnimation!.scale).animate(
             CurvedAnimation(
                 parent: _rightHandlerScaleAnimationController!,
-                reverseCurve: widget.handlerAnimation!.reverseCurve!,
+                reverseCurve: widget.handlerAnimation!.reverseCurve,
                 curve: widget.handlerAnimation!.curve));
 
     _setParameters();
@@ -1513,7 +1513,7 @@ class _FlutterSliderState extends State<FlutterSlider>
           xDragTmp = (_.position.dx - _containerLeft - _leftHandlerXPosition);
           yDragTmp = (_.position.dy - _containerTop - _leftHandlerYPosition);
 
-          if (!_tooltipData!.disabled! &&
+          if (!_tooltipData!.disabled &&
               _tooltipData!.alwaysShowTooltip! == false) {
             _leftTooltipOpacity = 1;
             _leftTooltipAnimationController!.forward();
@@ -1627,7 +1627,7 @@ class _FlutterSliderState extends State<FlutterSlider>
         onPointerMove: (_) {
           __dragging = true;
 
-          if (!_tooltipData!.disabled! &&
+          if (!_tooltipData!.disabled &&
               _tooltipData!.alwaysShowTooltip! == false) {
             _rightTooltipOpacity = 1;
           }
@@ -1643,7 +1643,7 @@ class _FlutterSliderState extends State<FlutterSlider>
           xDragTmp = (_.position.dx - _containerLeft - _rightHandlerXPosition);
           yDragTmp = (_.position.dy - _containerTop - _rightHandlerYPosition);
 
-          if (!_tooltipData!.disabled! &&
+          if (!_tooltipData!.disabled &&
               _tooltipData!.alwaysShowTooltip == false) {
             _rightTooltipOpacity = 1;
             _rightTooltipAnimationController!.forward();
@@ -1806,7 +1806,7 @@ class _FlutterSliderState extends State<FlutterSlider>
                 if (widget.rangeSlider!) {
                   if (_leftTapAndSlide) {
                     _trackBarSlideCallDragStated(0);
-                    if (!_tooltipData!.disabled! &&
+                    if (!_tooltipData!.disabled &&
                         _tooltipData!.alwaysShowTooltip! == false) {
                       _leftTooltipOpacity = 1;
                       _leftTooltipAnimationController!.forward();
@@ -1815,7 +1815,7 @@ class _FlutterSliderState extends State<FlutterSlider>
                         tappedPositionWithPadding: tappedPositionWithPadding);
                   } else {
                     _trackBarSlideCallDragStated(1);
-                    if (!_tooltipData!.disabled! &&
+                    if (!_tooltipData!.disabled &&
                         _tooltipData!.alwaysShowTooltip == false) {
                       _rightTooltipOpacity = 1;
                       _rightTooltipAnimationController!.forward();
@@ -1825,7 +1825,7 @@ class _FlutterSliderState extends State<FlutterSlider>
                   }
                 } else {
                   _trackBarSlideCallDragStated(1);
-                  if (!_tooltipData!.disabled! &&
+                  if (!_tooltipData!.disabled &&
                       _tooltipData!.alwaysShowTooltip! == false) {
                     _rightTooltipOpacity = 1;
                     _rightTooltipAnimationController!.forward();
@@ -1918,7 +1918,7 @@ class _FlutterSliderState extends State<FlutterSlider>
 
               if (_ignoreSteps.length == 0) {
                 if ((widget.lockHandlers! || __lockedHandlersDragOffset > 0) &&
-                    !_tooltipData!.disabled! &&
+                    !_tooltipData!.disabled &&
                     _tooltipData!.alwaysShowTooltip! == false) {
                   _leftTooltipOpacity = 1;
                   _leftTooltipAnimationController!.forward();
@@ -1975,7 +1975,7 @@ class _FlutterSliderState extends State<FlutterSlider>
       dynamic value,
       double? opacity,
       Animation<Offset>? animation}) {
-    if (_tooltipData!.disabled! || value == '')
+    if (_tooltipData!.disabled || value == '')
       return Positioned(
         child: Container(),
       );
@@ -2284,15 +2284,15 @@ class _FlutterSliderState extends State<FlutterSlider>
         (MediaQuery.of(context).size.width - _constraintMaxWidth!) <=
             _containerLeft) {
       RenderBox? containerRenderBox =
-          containerKey.currentContext!.findRenderObject() as RenderBox?;
-      _containerLeft = containerRenderBox!.localToGlobal(Offset.zero).dx;
+          containerKey.currentContext?.findRenderObject() as RenderBox?;
+      _containerLeft = containerRenderBox?.localToGlobal(Offset.zero).dx ?? 0 ;
     }
     if (_containerTop <= 0 ||
         (MediaQuery.of(context).size.height - _constraintMaxHeight!) <=
             _containerTop) {
       RenderBox? containerRenderBox =
-          containerKey.currentContext!.findRenderObject() as RenderBox?;
-      _containerTop = containerRenderBox!.localToGlobal(Offset.zero).dy;
+          containerKey.currentContext?.findRenderObject() as RenderBox?;
+      _containerTop = containerRenderBox?.localToGlobal(Offset.zero).dy ?? 0;
     }
   }
 }
@@ -2435,7 +2435,7 @@ class FlutterSliderTooltip {
   Widget? rightPrefix;
   Widget? rightSuffix;
   bool? alwaysShowTooltip;
-  bool? disabled;
+  bool disabled;
   bool? disableAnimation;
   FlutterSliderTooltipDirection? direction;
   FlutterSliderTooltipPositionOffset? positionOffset;
@@ -2451,7 +2451,7 @@ class FlutterSliderTooltip {
     this.rightSuffix,
     this.alwaysShowTooltip,
     this.disableAnimation,
-    this.disabled,
+    this.disabled = false,
     this.direction,
     this.positionOffset,
   });

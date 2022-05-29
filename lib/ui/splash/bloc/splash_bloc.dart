@@ -31,7 +31,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     this.personalizeRepository,
     this.staticContentRepository,
     // ignore: dead_code
-  }) : super(null!);
+  }) : super(LoadStartedContent());
 
   SplashState _determineSession() {
     final user = userRepository!.getCurrentUser();

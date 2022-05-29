@@ -102,7 +102,7 @@ class AppPreferencesImpl extends AppPreferences {
   }
 
   @override
-  String getWeatherInfo() {
+  String? getWeatherInfo() {
     return box.get(AppPreferences.CACHED_WEATHER_INFO);
   }
 
@@ -137,7 +137,7 @@ class AppPreferencesImpl extends AppPreferences {
   }
 
   @override
-  String getNotificationSetting() {
+  String? getNotificationSetting() {
     return box.get(AppPreferences.CACHED_NOTIFICATION_ITEMS);
   }
 
@@ -147,7 +147,7 @@ class AppPreferencesImpl extends AppPreferences {
   }
 
   @override
-  String getNotificationHistory() {
+  String? getNotificationHistory() {
     return box.get(AppPreferences.CACHED_NOTIFICATION_HISTORY_ITEMS);
   }
 
@@ -247,8 +247,8 @@ class AppPreferencesImpl extends AppPreferences {
   }
 
   @override
-  String getMyLocation() {
-    return box.get(AppPreferences.CACHED_MY_LOCATION);
+  String? getMyLocation() {
+    return box.get(AppPreferences.CACHED_MY_LOCATION) ;
   }
 
   @override

@@ -72,6 +72,8 @@ class SplashScreenState extends BaseState<SplashScreen>
               argument: state.userInfo);
         }
       } else if (state is SignedOut) {
+        print("###################");
+        print(StartedScreen.routeName);
         NavigateUtil.replacePage(context, StartedScreen.routeName);
       }
     });
@@ -113,9 +115,10 @@ class SplashScreenState extends BaseState<SplashScreen>
 
     // If the message also contains a data property with a "type" of "event|amenity|post",
     // navigate to a detail page
-    if (BaseState.checkDirectNotification(context, initialMessage!)) {
-      return;
-    }
+    ///Todo
+    // if (BaseState.checkDirectNotification(context, initialMessage)) {
+    //   return;
+    // }
 
     if (UniLinkWrapper.handleDirectLink(
       uri: uniLinkWrapper.getUri(),

@@ -97,7 +97,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           yield state.copyWith(currentRoute: RegisterRoute.popBack);
       }
     } else if (event is StartCountDown) {
-      await streamController!.cancel();
+      await streamController?.cancel();
       streamController =
           Stream<int>.periodic(const Duration(seconds: 1), (x) => 1)
               .take(totalTimeCount)

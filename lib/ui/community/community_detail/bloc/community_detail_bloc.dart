@@ -49,21 +49,21 @@ class CommunityDetailBloc
     } else if (event is AddFavorite) {
       if (state.postDetail!.place!.isFavorite != null) {
         state.postDetail!.place!.isFavorite =
-            !state.postDetail!.place!.isFavorite!;
+            !state.postDetail!.place!.isFavorite;
       }
       yield state.copyWith(timeRefresh: DateTime.now().toIso8601String());
 
       await homeRepository!.addFavorite(
-          event.id, state.postDetail!.place!.isFavorite!, FavoriteType.AMENITY);
+          event.id, state.postDetail!.place!.isFavorite, FavoriteType.AMENITY);
 
       // add(FetchPostDetail(state.postDetail.id.toString()));
       // add(FetchAlsoLike(event.id));
     } else if (event is AddPostFavorite) {
-      state.postDetail!.isFavorite = !state.postDetail!.isFavorite!;
+      state.postDetail!.isFavorite = !state.postDetail!.isFavorite;
       yield state.copyWith(timeRefresh: DateTime.now().toIso8601String());
 
       await homeRepository!.addFavorite(state.postDetail!.id.toString(),
-          state.postDetail!.isFavorite!, FavoriteType.COMMUNITY_POST);
+          state.postDetail!.isFavorite, FavoriteType.COMMUNITY_POST);
       add(FetchPostDetail(state.postDetail!.id.toString()));
     } else if (event is FetchNewComments) {
       final resultCommentServer =
@@ -107,7 +107,7 @@ class CommunityDetailBloc
         id: -1,
         username: userInfo!.fullName,
         liked: false,
-        image: userInfo.photo.url!,
+        image: userInfo.photo?.url,
         comment: event.comment,
       ));
       newListComment.addAll(state.comment!);
@@ -144,7 +144,7 @@ class CommunityDetailBloc
             id: -1,
             username: userInfo!.fullName,
             liked: false,
-            image: userInfo.photo.url!,
+            image: userInfo.photo?.url,
             comment: event.comment,
           ));
 

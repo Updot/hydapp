@@ -110,6 +110,7 @@ class DeactivateAccountPageState extends BaseState<DeactivateAccountPage> {
                               fontWeight: MyFontWeight.regular),
                         ),
                       ),
+                      if(state.moreItems!= null)
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -118,7 +119,7 @@ class DeactivateAccountPageState extends BaseState<DeactivateAccountPage> {
                             physics: const NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.only(
                                 left: sizeSmallx, right: sizeSmallx),
-                            itemCount: state.moreItems!.length,
+                            itemCount: state.moreItems?.length,
                             itemBuilder: (context, position) {
                               return DeactivateAccountItemWidget(
                                   state, state.moreItems![position], position);

@@ -71,12 +71,12 @@ class MenuCommunityDetailDialog extends StatelessWidget {
                     const SizedBox(height: sizeSmall),
                     Row(
                       children: [
-                        UIUtil.makeCircleImageWidget(postDetail.author!.photo!,
-                            initialName: postDetail.author!.username!,
+                        UIUtil.makeCircleImageWidget(postDetail.author!.photo ?? '',
+                            initialName: postDetail.author!.username,
                             size: sizeNormal),
                         const SizedBox(width: sizeVerySmall),
                         MyTextView(
-                          text: postDetail.author!.username!,
+                          text: postDetail.author!.username,
                           textStyle: textSmallx.copyWith(
                             color: const Color(0xff212237),
                             fontFamily: MyFontFamily.graphik,

@@ -89,7 +89,7 @@ class _HomePageState extends BaseState<HomePage> with AfterLayoutMixin {
     if (_isSearchForcus && _controllerSearch.text.isEmpty) {
       _homeSearchBloc.add(FocusFieldSearchEvent(
         _searchFocusNode.hasFocus,
-        _homeBloc.state.listTrending!,
+        _homeBloc.state.listTrending,
         experienceId: _homeBloc.state.currentArea!.id,
       ));
     } else {
@@ -106,7 +106,7 @@ class _HomePageState extends BaseState<HomePage> with AfterLayoutMixin {
 
     _baseBloc.add(FetchUserProfile());
     _homeBloc.add(FetchAllData());
-    //_homeBloc.add(FetchWeatherInfo('10.782560', '106.697497'));
+    _homeBloc.add(FetchWeatherInfo('10.782560', '106.697497'));
 
     _searchFocusNode.addListener(onFocusInputSearch);
     _homeBloc.listen((state) {
@@ -150,7 +150,7 @@ class _HomePageState extends BaseState<HomePage> with AfterLayoutMixin {
   @override
   void dispose() {
     _homeBloc.close();
-    _streamController.close();
+    // _streamController.close();
     _homeSearchBloc.close();
     refreshController.dispose();
     _searchFocusNode.dispose();
@@ -524,11 +524,11 @@ class _HomePageState extends BaseState<HomePage> with AfterLayoutMixin {
         const SizedBox(height: sizeNormal),
         MySocialMedia(
             title: context.locale.languageCode.toUpperCase() == PARAM_EN
-                ? state.appConfig!.titleSocialMediaEn
-                : state.appConfig!.titleSocialMediaAr,
-            linkFacebook: state.appConfig!.linkFacebook,
-            linkInstagram: state.appConfig!.linkInstagram,
-            linkTwitter: state.appConfig!.linkTwitter),
+                ? state.appConfig?.titleSocialMediaEn
+                : state.appConfig?.titleSocialMediaAr,
+            linkFacebook: state.appConfig?.linkFacebook,
+            linkInstagram: state.appConfig?.linkInstagram,
+            linkTwitter: state.appConfig?.linkTwitter),
       ],
     );
   }

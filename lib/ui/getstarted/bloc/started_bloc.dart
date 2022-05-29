@@ -46,7 +46,7 @@ class StartedBloc extends Bloc<StartedEvent, StartedState> {
       final result = await staticContentRepository!.fetchStaticContent();
       yield result.fold(
         (failure) => state,
-        (r) => state.copyWith(staticContent: r),
+        (r) => state.copyWith(staticContent: r, guestLoginSuccess: false),
       );
     } else if (event is DoLoginAsGuest) {
       final deviceId = await Utils.getDeviceDetails();
@@ -54,14 +54,14 @@ class StartedBloc extends Bloc<StartedEvent, StartedState> {
       final result = await userRepository!.loginAsGuest(deviceId, deviceToken);
       yield* _handleGuestLoginResult(result);
     } else if (event is OnIndexContentChange) {
-      yield state.copyWith(indexContent: event.index);
+      yield state.copyWith(indexContent: event.index, guestLoginSuccess: false);
     } else if (event is OnChangeLanguage) {
       await staticContentRepository!.fetchStaticContent();
       await homeRepository!.fetchListExperiences();
       await personalizeRepository!.fetchListPersonalizeItems();
       await helpAndReportRepository!.fetchHelpItems();
       await helpAndReportRepository!.fetchReportItems();
-      yield state.copyWith(selectedLanguage: event.language!.code);
+      yield state.copyWith(selectedLanguage: event.language!.code, guestLoginSuccess: false);
       add(LoadStartedContent());
     }
   }

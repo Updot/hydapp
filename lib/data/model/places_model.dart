@@ -16,7 +16,7 @@ class PlaceModel {
   ImageInfoData? thumb;
   dynamic totalReview;
   String? rate;
-  bool? isFavorite;
+  bool isFavorite = false;
   String? description;
   CategoryModel? category;
   String? shareUrl;
@@ -40,11 +40,11 @@ class PlaceModel {
     this.rate,
     this.category,
     this.shareUrl,
-    this.suitable,
+    this.suitable = const[],
     this.gallery,
     this.note,
     this.openTime,
-    this.isFavorite,
+    this.isFavorite = false,
   });
 
   PlaceModel.fromJson(Map<String, dynamic> json) {
@@ -56,18 +56,18 @@ class PlaceModel {
   }
 
   SuitableModel? get pickOneSuitable {
-    return (suitable!.length) > 0 ? suitable![0] : null;
+    return (suitable?.length)! > 0 ? suitable![0] : null;
   }
 
   String? pickOpenTimeByDay(int index) {
-    final len = openTime!.length;
+    final len = openTime?.length ?? 0;
     return len > index
         ? openTime![0].openTime
         : (len > 0 ? openTime![0].openTime : '');
   }
 
   String? pickCloseTimeByDay(int index) {
-    final len = openTime!.length;
+    final len = openTime?.length ?? 0;
     return len > index
         ? openTime![0].closeTime
         : (len > 0 ? openTime![0].closeTime : '');
@@ -79,7 +79,7 @@ class PlaceModel {
       title = json['title'];
       eta = json['eta'];
       etaCar = json['etaCar'];
-      isFavorite = json['is_favorite'];
+      isFavorite = json['is_favorite'] ?? false;
       description = json['intro_description'];
       if (json['location'] != null) {
         location = <LocationModel>[];
@@ -132,8 +132,8 @@ class PlaceModel {
     if (location != null) {
       data['location'] = location!.map((v) => v.toJson()).toList();
     }
-    data['image'] = image!.toJson();
-    data['thumb'] = thumb!.toJson();
+    data['image'] = image?.toJson();
+    data['thumb'] = thumb?.toJson();
     data['intro_description'] = description;
     data['total_review'] = totalReview;
     data['rate'] = rate;
@@ -163,7 +163,7 @@ class PlaceModel {
       location: itemModel.location,
       image: itemModel.image,
       thumb: itemModel.thumb,
-      isFavorite: itemModel.isFavorite,
+      isFavorite: itemModel.isFavorite ?? false,
       rate: itemModel.rate,
       openTime: itemModel.openTime,
       category: itemModel.category,
@@ -183,7 +183,7 @@ class PlaceModel {
       location: model.location,
       image: model.image,
       thumb: model.thumb,
-      isFavorite: model.isFavorite,
+      isFavorite: model.isFavorite ?? false,
       rate: model.rate,
       openTime: model.openTime,
       category: model.category,

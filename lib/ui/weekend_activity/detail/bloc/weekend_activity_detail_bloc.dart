@@ -68,7 +68,7 @@ class WeekendActivityDetailBloc
       }
       yield state.copyWith(timeRefresh: DateTime.now().toIso8601String());
       await homeRepository!.addFavorite(event.communityPost.id.toString(),
-          event.communityPost.isFavorite!, FavoriteType.COMMUNITY_POST);
+          event.communityPost.isFavorite, FavoriteType.COMMUNITY_POST);
       add(FetchFromCommunity());
     } else if (event is AddToFavorite) {
       // if (state.activityModel.isFavorite != null) {

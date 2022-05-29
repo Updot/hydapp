@@ -63,7 +63,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
   void _onTapLink() {
     setState(() {
       _readMore = !_readMore;
-      widget.callback!.call(_readMore);
+      widget.callback?.call(_readMore);
     });
   }
 

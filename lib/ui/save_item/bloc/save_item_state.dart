@@ -8,13 +8,13 @@ import '../../../data/repository/profile_repository.dart';
 class SaveItemState extends Equatable {
   final List<SaveItemModel>? listSaveItem;
   final List<AreaItem>? listAreas;
-  final Map<int, List<SaveItemModel>>? groupSaveItems;
+  final Map<int, List<SaveItemModel>> groupSaveItems;
   final int? currentAreaId;
 
   SaveItemState({
     this.listSaveItem,
     this.listAreas,
-    this.groupSaveItems,
+    required this.groupSaveItems,
     this.currentAreaId,
   });
 
@@ -47,7 +47,7 @@ class SaveItemState extends Equatable {
   List<Object> get props => [
         listSaveItem!,
         listAreas!,
-        groupSaveItems!,
+        groupSaveItems,
         currentAreaId!,
       ];
 

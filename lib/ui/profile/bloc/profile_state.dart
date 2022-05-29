@@ -33,13 +33,13 @@ class ProfileState {
   factory ProfileState.initial(
       UserRepository userRepository, ConfigRepository configRepository) {
     final userInfo = userRepository.getCurrentUser();
-    final listMarital = configRepository.getAppConfig()!.maritalStatus;
-    MaritalStatus currentMarital = userInfo!.maritalStatus(listMarital);
+    final listMarital = configRepository.getAppConfig()?.maritalStatus;
+    // final MaritalStatus currentMarital = userInfo?.maritalStatus();
     return ProfileState(
       userInfo: userInfo,
-      selectedDate: userInfo.dobDateTime(),
+      selectedDate: userInfo?.dobDateTime(),
       listMarital: listMarital,
-      maritalStatusSelected: currentMarital,
+      maritalStatusSelected: null,
       status: ProfileStatus.NONE,
       isPhoneValid: true,
       pathImage: '',

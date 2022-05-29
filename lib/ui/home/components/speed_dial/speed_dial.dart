@@ -226,7 +226,7 @@ class _SpeedDialState extends State<SpeedDial>
 
     final animatedFloatingButton = AnimatedFloatingButton(
       visible: widget.visible!,
-      tooltip: widget.tooltip!,
+      tooltip: widget.tooltip,
       backgroundColor: widget.backgroundColor!,
       foregroundColor: widget.foregroundColor!,
       elevation: widget.elevation!,

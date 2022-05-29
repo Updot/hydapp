@@ -155,7 +155,7 @@ class AssetSeeAllGridScreenState extends BaseState<AssetSeeAllGridScreen> {
                                     crossAxisCount: 3,
                                     childAspectRatio: 0.7,
                                     mainAxisSpacing: sizeVerySmall,
-                                    children: state.allAssets!
+                                    children: state.allAssets
                                         .map((e) => Container(
                                               margin: const EdgeInsets.only(
                                                   left: sizeVerySmall,
@@ -175,8 +175,7 @@ class AssetSeeAllGridScreenState extends BaseState<AssetSeeAllGridScreen> {
                                     crossAxisCount: 3,
                                     childAspectRatio: 0.7,
                                     mainAxisSpacing: sizeVerySmall,
-                                    children: state.allAssets!
-                                        .map((e) => Container(
+                                    children: state.allAssets.map((e) => Container(
                                               margin: const EdgeInsets.only(
                                                   left: sizeVerySmall,
                                                   bottom: sizeVerySmall,

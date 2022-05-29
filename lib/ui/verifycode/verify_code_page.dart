@@ -40,7 +40,7 @@ class VerifyCodeScreenState extends BaseState<VerifyCodeScreen>
     with AfterLayoutMixin {
   final VerifyCodeBloc _verifyCodeBloc = sl<VerifyCodeBloc>();
   String pinCodeData = '';
-   ProgressDialog? _pbLoading;
+  ProgressDialog? _pbLoading;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class VerifyCodeScreenState extends BaseState<VerifyCodeScreen>
 
   void initBasicInfo() {
     _verifyCodeBloc.listen((state) {
-      if (state.isLogout!) {
+      if ( state.isLogout != null && state.isLogout!) {
         print('state.isLogout');
         _pbLoading!.close();
         NavigateUtil.replacePage(context, StartedScreen.routeName);
@@ -251,7 +251,9 @@ class VerifyCodeScreenState extends BaseState<VerifyCodeScreen>
   void doSubmitPinCode() {
     final code = pinCodeData;
     final errMessageCode = validateCodePassword(code);
-    if (code.isNotEmpty && (errMessageCode!.isEmpty)) {
+    print(code);
+    print(errMessageCode);
+    if (code.isNotEmpty && (errMessageCode?.isEmpty ?? true)) {
       _pbLoading!.show(
         msg: 'Please wait ...',
         max: 100,
@@ -270,7 +272,8 @@ class VerifyCodeScreenState extends BaseState<VerifyCodeScreen>
 
   @override
   void afterFirstLayout(BuildContext context) {
-    if ((widget.email!.isNotEmpty) && (widget.tokenCode!.isNotEmpty)) {
+    if ((widget.email != null && widget.email!.isNotEmpty) &&
+        (widget.tokenCode!.isNotEmpty)) {
       /// this case if use come from Register Flow
       _verifyCodeBloc.add(StartCountDown());
     } else {

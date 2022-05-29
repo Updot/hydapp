@@ -153,13 +153,13 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
         .toList();
   }
 
-  Stream<HomeSearchSuccess> _handleSearchResult(
+  Stream<HomeSearchState> _handleSearchResult(
       Either<Failure, SearchResultDataModel> resultServer,
       lastKeyword,
       event) async* {
     yield resultServer.fold(
       (failure) {
-        return state as HomeSearchSuccess;
+        return state as HomeSearchError;
       },
       (result) {
         return HomeSearchSuccess(

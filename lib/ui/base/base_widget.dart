@@ -107,10 +107,10 @@ class BaseState<T extends BaseWidget> extends State<T> {
   static bool checkDirectNotification(
       BuildContext context, RemoteMessage? message,
       {String? dataId, String? dataType}) {
-    final String id = (message!.data.containsKey('id') != null ? message.data.containsKey('id') : false)
+    final String id = (message?.data.containsKey('id') != null ? message!.data.containsKey('id') : false)
         ? message.data['id']
         : dataId;
-    final String type = (message.data.containsKey('type') != null ? message.data.containsKey('type') : false)
+    final String type = (message?.data.containsKey('type') != null ? message!.data.containsKey('type') : false)
         ? message.data['type']
         : dataType;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NavigateUtil {
-  static Future<T?> openPage<T extends Object>(
+  static openPage(
       BuildContext context, String routeName,
       {Object? argument, bool release = false}) {
     if (!release) {
@@ -13,10 +13,10 @@ class NavigateUtil {
     }
   }
 
-  static Future<T?> replacePage<T extends Object>(
+  static   replacePage(
       BuildContext context, String routeName,
       {Object? argument}) {
-    return Navigator.pushReplacementNamed(context, routeName,
+     Navigator.pushReplacementNamed(context, routeName,
         arguments: argument);
   }
 

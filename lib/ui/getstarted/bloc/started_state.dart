@@ -4,13 +4,13 @@ part of 'started_bloc.dart';
 class StartedState {
   final StaticContent? staticContent;
   final int? currentIndexContent;
-  final bool? guestLoginSuccess;
+  final bool guestLoginSuccess;
   final String? selectedLanguage;
   final List<Language>? arrLanguage;
 
   StartedState({
     @required this.staticContent,
-    @required this.guestLoginSuccess,
+    required this.guestLoginSuccess,
     @required this.selectedLanguage,
     @required this.arrLanguage,
     this.currentIndexContent,
@@ -30,7 +30,7 @@ class StartedState {
   StartedState copyWith({
     int? indexContent,
     StaticContent? staticContent,
-    bool? guestLoginSuccess,
+    required bool guestLoginSuccess,
     String? selectedLanguage,
     List<Language>? arrLanguage,
   }) {
@@ -86,7 +86,7 @@ class StartedState {
 
   List<Object> get props => [
         staticContent!,
-        guestLoginSuccess!,
+        guestLoginSuccess,
         currentIndexContent!,
         selectedLanguage!,
         arrLanguage!

@@ -35,9 +35,9 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
           event.fid!, event.type!, event.key!, event.itemSelected);
     } else if (event is MultiSelectedChanged) {
       final items = <int, FilterItem>{};
-      if (state.filterOptSelected!.containsKey(event.fid)) {
+      if (state.filterOptSelected.containsKey(event.fid)) {
         items.addAll(Map<int, FilterItem>.from(
-            state.filterOptSelected![event.fid]![FILTER_KEY_VALUE]));
+            state.filterOptSelected[event.fid]![FILTER_KEY_VALUE]));
       }
 
       if (items.containsKey(event.itemMultiSelected!.id)) {
@@ -63,7 +63,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     };
 
     final mapFilter = <int, Map>{};
-    mapFilter.addAll(state.filterOptSelected!);
+    mapFilter.addAll(state.filterOptSelected);
     mapFilter[fid] = filterValue;
     return state.copyWith(filterOptSelected: mapFilter);
   }
@@ -79,7 +79,7 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     };
 
     final mapFilter = <int, Map>{};
-    mapFilter.addAll(state.filterOptSelected!);
+    mapFilter.addAll(state.filterOptSelected);
     mapFilter[fid] = filterValue;
     return state.copyWith(filterOptSelected: mapFilter);
   }

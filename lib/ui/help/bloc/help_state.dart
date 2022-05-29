@@ -14,8 +14,8 @@ class HelpState extends Equatable {
   final bool? isEmailValid;
   final bool? isPhoneValid;
   final bool? isDesValid;
-  final bool? isSuccess;
-  final bool? isError;
+  final bool isSuccess;
+  final bool isError;
   final String? email;
   final String? phone;
   final String? description;
@@ -29,8 +29,8 @@ class HelpState extends Equatable {
     this.isPhoneValid,
     this.helpItems,
     this.email,
-    this.isSuccess,
-    this.isError,
+    required this.isSuccess,
+    required this.isError,
     this.phone,
     this.description,
     this.countrySelected,
@@ -76,8 +76,8 @@ class HelpState extends Equatable {
       isEmailValid: isEmailValid ?? this.isEmailValid,
       isPhoneValid: isPhoneValid ?? this.isPhoneValid,
       isDesValid: isDesValid ?? this.isDesValid,
-      isSuccess: isSuccess,
-      isError: isError,
+      isSuccess: isSuccess ?? this.isSuccess,
+      isError: isError ?? this.isError,
       email: email ?? this.email,
       currentHelpItem: currentHelpItem ?? this.currentHelpItem,
       helpItems: helpItems ?? this.helpItems,
@@ -90,18 +90,18 @@ class HelpState extends Equatable {
 
   @override
   List<Object> get props => [
-        isEmailValid!,
-        isPhoneValid!,
-        isDesValid!,
-        isError!,
-        isSuccess!,
-        currentHelpItem!,
-        email!,
-        phone!,
-        description!,
-        helpItems!,
-        countrySelected!,
-        listCountry!,
+        isEmailValid ?? '',
+        isPhoneValid ?? '',
+        isDesValid ?? '',
+        isError ,
+        isSuccess,
+        currentHelpItem ?? '',
+        email ?? '',
+        phone ?? '',
+        description ?? '',
+        helpItems ?? '',
+        countrySelected ?? '',
+        listCountry ?? '',
       ];
 
   @override

@@ -75,7 +75,7 @@ class _StaticMapsProviderState extends State<StaticMapsProvider> {
       'key': '${widget.googleMapsApiKey}',
     });
     setState(() {
-      startUrl = nextUrl!;
+      startUrl = nextUrl ?? '';
       nextUrl = finalUri.toString();
     });
   }

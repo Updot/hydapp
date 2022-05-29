@@ -9,7 +9,7 @@ import 'normal_dialog_template.dart';
 class CountryDialog extends StatelessWidget {
   final List<Country> listCountry;
   final Function(Country) onSelectCountry;
-  final Country countrySelected;
+  final Country? countrySelected;
 
   const CountryDialog(
       {Key? key,

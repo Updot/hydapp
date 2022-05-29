@@ -29,8 +29,8 @@ class NotificationHistoryState extends Equatable {
 
   @override
   List<Object> get props => [
-        notificationItemHistoryList!,
-        refreshTime!,
-        notificationItemHistoryList!.length,
+        notificationItemHistoryList?? '',
+        refreshTime ?? '',
+        notificationItemHistoryList?.length ?? '',
       ];
 }

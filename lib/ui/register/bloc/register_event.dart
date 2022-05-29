@@ -43,12 +43,12 @@ class HasSocialEmail extends RegisterEvent {}
 class LoadCountryCode extends RegisterEvent {}
 
 class OnSelectMarital extends RegisterEvent {
-  final MaritalStatus? maritalStatus;
+  final MaritalStatus maritalStatus;
 
-  OnSelectMarital({ this.maritalStatus});
+  OnSelectMarital({ required this.maritalStatus});
 
   @override
-  List<Object> get props => [maritalStatus!];
+  List<Object> get props => [maritalStatus];
 }
 
 class OnSelectCountryCode extends RegisterEvent {

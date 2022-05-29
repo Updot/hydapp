@@ -215,7 +215,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
                                       child: MyButton(
                                         paddingHorizontal: sizeImageNormal,
                                         text: Lang.done.tr(),
-                                        disable: !state.ableToRegister!,
+                                        disable: !state.ableToRegister,
                                         disableColor: const Color(0xffA7A8BB),
                                         onTap: () => doRegister(state),
                                         isFillParent: false,
@@ -283,7 +283,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
                   textHint: Lang.register_enter_first_name.tr(),
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   textController: _firstNameController,
-                  errorMessage: state.isFirstNameValid!
+                  errorMessage: state.isFirstNameValid
                       ? null
                       : Lang.login_invalid_first_name.tr(),
                 ),
@@ -298,7 +298,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
                   textHint: Lang.register_enter_last_name.tr(),
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   textController: _lastNameController,
-                  errorMessage: state.isLastNameValid!
+                  errorMessage: state.isLastNameValid
                       ? null
                       : Lang.login_invalid_last_name.tr(),
                 ),
@@ -310,7 +310,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
           ),
           PhoneNumberFormField(
             focusNode: _focusPhone,
-            text: state.countrySelected!.dialCode,
+            text: state.countrySelected?.dialCode,
             onPressCountryCode: () => onPressCountryCode(context, state),
             autoValidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.number,
@@ -318,7 +318,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
               FocusScope.of(context).unfocus();
             },
             textController: _phoneController,
-            errorMessage: state.isPhoneValid!
+            errorMessage: state.isPhoneValid
                 ? null
                 : Lang.login_invalid_mobile_phone.tr(),
           ),
@@ -364,7 +364,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
   bool checkStateButton(RegisterState state) {
     switch (state.currentRoute) {
       case RegisterRoute.enterInformationForm:
-        return !state.ableToRegister!;
+        return !state.ableToRegister;
       default:
         return true;
     }
@@ -383,7 +383,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
             isEnable: state.hasSocialEmail != 1,
             textController: _emailController,
             errorMessage:
-                state.isEmailValid! ? null : Lang.login_invalid_email.tr(),
+                state.isEmailValid ? null : Lang.login_invalid_email.tr(),
           ),
           const SizedBox(
             height: sizeSmallxxx,
@@ -396,12 +396,12 @@ class _RegisterPageState extends BaseState<RegisterPage> {
             obscureText: true,
             textController: _passwordController,
             hasPasswordRule: true,
-            hasUppercase: state.hasUppercase!,
-            hasDigits: state.hasDigits!,
+            hasUppercase: state.hasUppercase,
+            hasDigits: state.hasDigits,
             keyboardType: TextInputType.visiblePassword,
-            hasSpecialCharacters: state.hasSpecialCharacters!,
-            hasSpaceCharacters: state.hasSpaceCharacters!,
-            hasMinLength: state.hasMinLength!,
+            hasSpecialCharacters: state.hasSpecialCharacters,
+            hasSpaceCharacters: state.hasSpaceCharacters,
+            hasMinLength: state.hasMinLength,
           ),
           const SizedBox(
             height: sizeSmallxxx,
@@ -415,7 +415,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
             obscureText: true,
             onFieldSubmitted: (v) => doRegister(state),
             textController: _confirmPasswordController,
-            errorMessage: state.isPasswordMatched!
+            errorMessage: state.isPasswordMatched
                 ? null
                 : Lang.register_confirm_password_not_matched.tr(),
           ),
@@ -454,8 +454,8 @@ class _RegisterPageState extends BaseState<RegisterPage> {
             MyTextView(
               textAlign: TextAlign.start,
               text: langCode.toUpperCase() == PARAM_EN
-                  ? registerState.maritalStatusSelected!.nameEn
-                  : registerState.maritalStatusSelected!.nameAr,
+                  ? registerState.maritalStatusSelected.nameEn
+                  : registerState.maritalStatusSelected.nameAr,
               textStyle: textSmallxx.copyWith(color: Colors.black),
             ),
           ],
@@ -491,7 +491,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
   }
 
   void doRegister(RegisterState state) {
-    if (!state.ableToRegister! || !canNextPhase(state)) {
+    if (!state.ableToRegister || !canNextPhase(state)) {
       _showToast(Lang.register_please_fill_all_fields.tr());
       return;
     }
@@ -504,10 +504,10 @@ class _RegisterPageState extends BaseState<RegisterPage> {
         password: _passwordController.text,
         dob: DateUtil.dateFormatDDMMYYYY(state.selectedDate!, locale: 'en'),
         type: getTypeByEnum(widget.registerEnum!),
-        dialCode: state.countrySelected!.dialCode,
-        maritalId: state.maritalStatusSelected!.id.toString(),
+        dialCode: state.countrySelected?.dialCode,
+        maritalId: state.maritalStatusSelected.id.toString(),
         socialId: getSocialIdByEnum(widget.registerEnum!,
-            widget.socialLoginData!.id, _emailController.text),
+            widget.socialLoginData?.id ?? '', _emailController.text),
         hasSocialEmail: state.hasSocialEmail));
   }
 
@@ -518,7 +518,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
         _passwordController.text.isNotEmpty &&
         (_passwordController.text == _confirmPasswordController.text) &&
         _confirmPasswordController.text.isNotEmpty &&
-        state.isPhoneValid! &&
+        state.isPhoneValid &&
         (state.selectedDate != null &&
             DateUtil.isValidDOB(state.selectedDate!));
   }
@@ -692,8 +692,8 @@ class _RegisterPageState extends BaseState<RegisterPage> {
       showDialog(
         context: context,
         builder: (BuildContext context) => MaritalDialog(
-          listMarital: state.listMarital!,
-          maritalSelected: state.maritalStatusSelected!,
+          listMarital: state.listMarital,
+          maritalSelected: state.maritalStatusSelected,
           onSelectMarital: onSelectMarital,
         ),
       );
@@ -703,18 +703,18 @@ class _RegisterPageState extends BaseState<RegisterPage> {
           context: context,
           builder: (BuildContext builder) {
             return CupertinoPickerView(
-              listData: state.listMarital!,
+              listData: state.listMarital,
               positionSelected:
-                  state.listMarital!.indexOf(state.maritalStatusSelected!),
+                  state.listMarital.indexOf(state.maritalStatusSelected),
               onSelectedItemChanged: (value) =>
-                  onSelectMarital(state.listMarital![value]),
+                  onSelectMarital(state.listMarital[value]),
               listWidget:
-                  List<Widget>.generate(state.listMarital!.length, (int index) {
+                  List<Widget>.generate(state.listMarital.length, (int index) {
                 return Center(
                   child: MyTextView(
                     text: langCode.toUpperCase() == PARAM_EN
-                        ? state.listMarital![index].nameEn
-                        : state.listMarital![index].nameAr,
+                        ? state.listMarital[index].nameEn
+                        : state.listMarital[index].nameAr,
                     textStyle: textSmallxxx.copyWith(color: Colors.black),
                   ),
                 );

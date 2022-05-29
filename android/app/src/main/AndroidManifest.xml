@@ -7,23 +7,23 @@
          FlutterApplication and put your custom class here. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Permissions options for the `camera` group -->
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <!-- Permissions options for the `storage` group -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<!--    <uses-permission android:name="android.permission.CAMERA"/>-->
+<!--    &lt;!&ndash; Permissions options for the `storage` group &ndash;&gt;-->
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
     <!-- Permissions options for the `calendar` group -->
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
+<!--    <uses-permission android:name="android.permission.READ_CALENDAR" />-->
+<!--    <uses-permission android:name="android.permission.WRITE_CALENDAR" />-->
+<!--    <uses-permission android:name="android.permission.RECORD_AUDIO" />-->
+<!--    <uses-permission android:name="android.permission.FLASHLIGHT" />-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     
 
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera.flash" />
+<!--    <uses-feature android:name="android.hardware.camera" />-->
+<!--    <uses-feature android:name="android.hardware.camera.autofocus" />-->
+<!--    <uses-feature android:name="android.hardware.camera.flash" />-->
 
     <application
         android:name="${applicationName}"
@@ -38,7 +38,8 @@
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:theme="@style/LaunchTheme"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
             <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
                 android:value="true" />
@@ -118,7 +119,7 @@
         <!-- Set up the Sign in with Apple activity, such that it's callable from the browser-redirect -->
         <activity
             android:name="com.aboutyou.dart_packages.sign_in_with_apple.SignInWithAppleCallback"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

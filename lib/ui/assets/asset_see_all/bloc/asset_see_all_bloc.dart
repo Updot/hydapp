@@ -44,16 +44,16 @@ class AssetSeeAllBloc extends Bloc<AssetSeeAllEvent, AssetSeeAllState> {
     } else if (event is FetchAsset) {
       final assets = await assetRepository!.fetchAmenities(
           experiId: event.experienceId!.toString(),
-          filterAdv: event.filterAdv!,
+          filterAdv: event.filterAdv ?? {},
           filter: event.facilitesId,
           viewAssetType: event.viewAssetType!);
       yield* assetSeeAllInteract!.handleAssetsResult(assets, state);
 
-      if (state.allAssets!.isNotEmpty) {
-        add(FetchAlsoLike(state.allAssets![0].id.toString()));
+      if (state.allAssets.isNotEmpty) {
+        add(FetchAlsoLike(state.allAssets[0].id.toString()));
       }
     } else if (event is DoSortItems) {
-      assetSeeAllInteract!.doSortAZ(state.allAssets!, event.sortType);
+      assetSeeAllInteract!.doSortAZ(state.allAssets, event.sortType);
       yield state.copyWith(sortType: event.sortType);
     }
   }

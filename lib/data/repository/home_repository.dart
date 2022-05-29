@@ -158,11 +158,11 @@ class HomeRepositoryImpl extends Repository implements HomeRepository {
       dynamic filterData}) async {
     return catchData<CommunityModel>(() async {
       final data = await remoteDataSource.fetchListCommunity(
-          cateId: cateId!,
-          experienceId: experienceId!,
-          filterAdv: filterAdv!,
-          pageIndex: pageIndex!,
-          amenityId: amenityId!,
+          cateId: cateId ?? '',
+          experienceId: experienceId??'',
+          filterAdv: filterAdv ?? {},
+          pageIndex: pageIndex ?? 0,
+          amenityId: amenityId ??'',
           filterData: filterData);
 
       data.allPost.forEach((element) async {
@@ -191,7 +191,7 @@ class HomeRepositoryImpl extends Repository implements HomeRepository {
     return catchData<List<ActivityModel>>(() async {
       final data = await remoteDataSource.fetchListWeekendActivities(
           experienceId: experienceId!,
-          pageIndex: pageIndex!,
+          pageIndex: pageIndex ?? 0,
           filterData: filterData);
       saveActivities(data);
       return data;
@@ -228,23 +228,23 @@ class HomeRepositoryImpl extends Repository implements HomeRepository {
     return localDataSrc.saveActivities(items);
   }
 
-  Future<String> _estimateTime(PlaceModel place) async {
+  Future<String?> _estimateTime(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation!.lat ?? '0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return Utils.etaWalkingTime(distance);
   }
 
   Future<String> _estimateTimeCar(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation!.lat?? ' 0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return Utils.etaWalkingTimeCar(distance);
   }
 
   Future<double> _distance(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation!.lat?? ' 0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return distance;
   }

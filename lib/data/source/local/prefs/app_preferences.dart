@@ -47,7 +47,7 @@ abstract class AppPreferences {
 
   void saveWeatherInfo(String data);
 
-  String getWeatherInfo();
+  String? getWeatherInfo();
 
   void saveCommunities(String data);
 
@@ -67,11 +67,11 @@ abstract class AppPreferences {
 
   void saveNotificationSetting(String data);
 
-  String getNotificationSetting();
+  String? getNotificationSetting();
 
   void saveNotificationHistory(String data);
 
-  String getNotificationHistory();
+  String? getNotificationHistory();
 
   void savePostDetail(String data, String id);
 
@@ -83,7 +83,7 @@ abstract class AppPreferences {
 
   void saveMyLocation(String locationData);
 
-  String getMyLocation();
+  String? getMyLocation();
 
   void saveStaticContent(String data);
 

@@ -6,7 +6,7 @@ import '../../../data/model/user_info.dart';
 @immutable
 class LoginState extends Equatable {
   final bool? isEmailValid;
-  final bool? isPasswordValid;
+  final bool isPasswordValid;
   final bool? ableToLogin;
   final LoginStatus? loginStatus;
   final String? socialId;
@@ -18,7 +18,7 @@ class LoginState extends Equatable {
 
   LoginState({
     @required this.isEmailValid,
-    @required this.isPasswordValid,
+    required this.isPasswordValid,
     this.ableToLogin = false,
     this.loginStatus,
     this.socialId,
@@ -38,7 +38,7 @@ class LoginState extends Equatable {
   }
 
   LoginState copyWith({
-    bool? isEmailValid,
+    bool isEmailValid = false,
     String? email,
     UserInfo? userInfo,
     String? errorMessage,
@@ -46,11 +46,11 @@ class LoginState extends Equatable {
     String? tokenState,
     String? socialMethod,
     LoginStatus? loginStatus,
-    bool? isPasswordValid,
+    bool isPasswordValid = false,
   }) {
     return LoginState(
-      isEmailValid: isEmailValid ?? this.isEmailValid,
-      isPasswordValid: isPasswordValid ?? this.isPasswordValid,
+      isEmailValid: isEmailValid,
+      isPasswordValid: isPasswordValid,
       userInfo: userInfo ?? this.userInfo,
       email: email ?? this.email,
       socialId: socialId ?? this.socialId,
@@ -58,8 +58,8 @@ class LoginState extends Equatable {
       socialMethod: socialMethod ?? this.socialMethod,
       errorMessage: errorMessage,
       loginStatus: loginStatus,
-      ableToLogin: isLoginAble(isEmailValid!,
-          isPasswordValid!),
+      ableToLogin: isLoginAble(isEmailValid,
+          isPasswordValid),
     );
   }
 
@@ -89,13 +89,13 @@ class LoginState extends Equatable {
   @override
   List<Object> get props => [
         isEmailValid!,
-        isPasswordValid!,
+        isPasswordValid,
         ableToLogin!,
-        tokenState!,
-        errorMessage!,
-        socialId!,
-        loginStatus!,
-        email!
+        tokenState??'',
+        errorMessage??'',
+        socialId??'',
+        loginStatus??'',
+        email??''
       ];
 
   @override

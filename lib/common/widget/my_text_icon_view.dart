@@ -43,7 +43,7 @@ class MyTextIconView extends StatelessWidget {
             Container(
                 margin: marginText,
                 child: Text(
-                  text!,
+                  text??'',
                   key: key,
                   overflow: TextOverflow.ellipsis,
                   textAlign: textAlign,

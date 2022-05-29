@@ -170,7 +170,7 @@ class Utils {
     return items;
   }
 
-  static String etaWalkingTime(double distance) {
+  static  etaWalkingTime(double distance) {
     distance = distance * 1000;
     final timeInMins = (distance * 60) / 5000;
     if (timeInMins < 1) {
@@ -180,7 +180,6 @@ class Utils {
       return '${timeInMins.round()} ${timeInMins.round() == 1 ? Lang.util_min_one.tr() : Lang.util_min_more.tr()}';
     }
     // ignore: null_check_always_fails
-    return null!;
   }
 
   static String etaWalkingTimeCar(double distance) {

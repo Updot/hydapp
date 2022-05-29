@@ -42,9 +42,9 @@ class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
           (r) => state.copyWith(tokenCode: r, timeResend: totalTimeCount));
       add(StartCountDown());
     } else if (event is SubmitVerifyCode) {
-      await streamController!.cancel();
+      await streamController?.cancel();
       final result =
-          await userRepository!.doActivateAccount(event.code, state.tokenCode!);
+          await userRepository!.doActivateAccount(event.code, state.tokenCode);
 
       // ignore: prefer_typing_uninitialized_variables
       var resultUserInfo;
@@ -53,16 +53,20 @@ class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
       if (result.isRight() && state.userInfo != null) {
         resultUserInfo = await userRepository!.getMe();
       }
-      yield result.fold(
-          (l) => state.failVerifyCode(
-              errMessage: (l as RemoteDataFailure).errorMessage),
-          (r) => state.copyWith(
-              verifyCodeStatus: VerifyCodeStatus.success,
-              userInfo: resultUserInfo.getOrElse(null)));
+      print(resultUserInfo);
+        yield result.fold(
+                (l) =>
+                state.failVerifyCode(
+                    errMessage: (l as RemoteDataFailure).errorMessage),
+                (r) =>
+                state.copyWith(
+                    verifyCodeStatus: VerifyCodeStatus.success,
+                    ));
+
     } else if (event is DoCountDown) {
       yield state.countDown();
     } else if (event is StartCountDown) {
-      await streamController!.cancel();
+      await streamController?.cancel();
       streamController =
           Stream<int>.periodic(const Duration(seconds: 1), (x) => 1)
               .take(totalTimeCount)

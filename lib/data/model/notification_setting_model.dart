@@ -21,8 +21,8 @@ class NotificationSettingModel {
   set name(String name) => _name = name;
   String get type => _type!;
   set type(String type) => _type = type;
-  int get status => _status!;
-  set status(int status) => _status = status;
+  int? get status => _status;
+  set status(int? status) => _status = status;
   bool get hasChange => _hasChange!;
   set hasChange(bool hasChange) => _hasChange = hasChange;
 

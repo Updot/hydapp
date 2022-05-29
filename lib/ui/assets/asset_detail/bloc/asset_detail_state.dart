@@ -3,18 +3,18 @@ part of 'asset_detail_bloc.dart';
 @immutable
 class AssetDetailState extends Equatable {
   final AssetDetail? assetDetail;
-  final List<PlaceModel>? alsoLikeAssets;
+  final List<PlaceModel> alsoLikeAssets;
   final CommunityModel? communityModel;
   final String? timeRefresh;
-  final bool? isRefreshing;
+  final bool isRefreshing;
   final UserInfo? userInfo;
 
   AssetDetailState({
     this.assetDetail,
     this.userInfo,
     this.communityModel,
-    this.isRefreshing,
-    this.alsoLikeAssets,
+    this.isRefreshing = false,
+     this.alsoLikeAssets =const [],
     this.timeRefresh,
   });
 
@@ -23,7 +23,7 @@ class AssetDetailState extends Equatable {
       UserRepository userRepository, HomeRepository homeRepository) {
     return AssetDetailState(
       assetDetail: null,
-      alsoLikeAssets: null,
+      alsoLikeAssets: [],
       communityModel: homeRepository.getCommunityListInfo(),
       isRefreshing: false,
       userInfo: userRepository.getCurrentUser(),
@@ -33,7 +33,7 @@ class AssetDetailState extends Equatable {
   AssetDetailState copyWith({
     AssetDetail? assetDetail,
     String? timeRefresh,
-    bool? isRefreshing,
+    bool isRefreshing = false,
     UserInfo? userInfo,
     CommunityModel? communityModel,
     List<PlaceModel>? alsoLikeAssets,
@@ -50,11 +50,11 @@ class AssetDetailState extends Equatable {
 
   @override
   List<Object> get props => [
-        assetDetail!,
-        timeRefresh!,
-        alsoLikeAssets!,
-        isRefreshing!,
-        userInfo!,
-        communityModel!
+        assetDetail?? '',
+        timeRefresh ?? '',
+        alsoLikeAssets,
+        isRefreshing,
+        userInfo ??'',
+        communityModel??''
       ];
 }

@@ -74,13 +74,13 @@ class _ProfilePageState extends BaseState<ProfilePage> {
                   children: [
                     BlocBuilder<ProfileBloc, ProfileState>(
                         buildWhen: (previousState, currentState) {
-                      return previousState.userInfo!.photo.url !=
-                          currentState.userInfo!.photo.url;
+                      return previousState.userInfo!.photo?.url !=
+                          currentState.userInfo!.photo?.url;
                     }, builder: (context, state) {
                       return SizedBox(
                         height: constraints.maxHeight * 0.6,
                         child: UIUtil.makeImageWidget(
-                          state.userInfo!.photo.url ?? Res.bg_profile_guest,
+                          state.userInfo!.photo?.url ?? Res.bg_profile_guest,
                           boxFit: BoxFit.cover,
                           width: constraints.maxWidth,
                         ),

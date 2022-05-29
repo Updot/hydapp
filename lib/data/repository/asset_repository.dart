@@ -84,7 +84,7 @@ class AssetRepositoryImpl extends Repository implements AssetRepository {
           filter: filter,
           experienceId: experiId!,
           filterAdv: filterAdv!,
-          category: category!);
+          category: category ?? '');
       data.forEach((e) async {
         e.eta = await _estimateTime(e);
         e.etaCar = await _estimateTimeCar(e);
@@ -95,23 +95,23 @@ class AssetRepositoryImpl extends Repository implements AssetRepository {
     });
   }
 
-  Future<String> _estimateTime(PlaceModel place) async {
+  Future<String?>? _estimateTime(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation?.lat ?? '0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return Utils.etaWalkingTime(distance);
   }
 
   Future<double> _distance(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation!.lat ?? '0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return distance;
   }
 
   Future<String> _estimateTimeCar(PlaceModel place) async {
     final distance = await locationWrapper!.calculateDistance(
-        double.tryParse(place.pickOneLocation!.lat)!,
+        double.tryParse(place.pickOneLocation!.lat ?? '0')!,
         double.tryParse(place.pickOneLocation!.long)!);
     return Utils.etaWalkingTimeCar(distance);
   }

@@ -138,7 +138,7 @@ class _FilterToolDialogState extends State<FilterToolDialog> {
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
             setState(() {
-              values[item.id!] = values[item.id]!;
+              values[item.id!] = !values[item.id]!;
             });
           },
           child: Container(

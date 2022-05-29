@@ -20,10 +20,13 @@ class WeatherWidget extends StatelessWidget {
   WeatherWidget({Key? key, this.weatherInfo, this.userInfo}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print("WeatherInfor$weatherInfo");
     String? iconWeather;
-    if (weatherInfo!.weatherIcon != null) {
+    if (weatherInfo?.weatherIcon != null) {
       iconWeather = weatherInfo!.weatherIcon.toString();
+
     }
+    print('WeatherIcn##########$iconWeather');
     return Container(
       margin: const EdgeInsets.only(top: sizeNormal),
       child: Row(
@@ -35,8 +38,8 @@ class WeatherWidget extends StatelessWidget {
             flex: 1,
             child: Row(
               children: [
-                if (userInfo!.isUser())
-                  UIUtil.makeCircleImageWidget(userInfo!.photo.url!.trim(),
+                if (  userInfo?.fullName != null && userInfo!.isUser())
+                  UIUtil.makeCircleImageWidget(userInfo!.photo?.url!.trim(),
                       size: sizeLarge, initialName: userInfo!.fullName),
                 const SizedBox(
                   width: sizeSmall,
@@ -100,7 +103,7 @@ class WeatherWidget extends StatelessWidget {
                     const SizedBox(
                       width: sizeVerySmall,
                     ),
-                    if (iconWeather! != null)
+                      if(iconWeather!= null)
                       UIUtil.makeImageWidget(
                           weatherService!.getImageLink(iconWeather),
                           size: const Size(sizeNormalxxx, sizeNormalxxx)),

@@ -113,7 +113,8 @@ class FilterPageState extends BaseState<FilterPage> {
                             itemCount: widget.areaItem!.filter!.length,
                             padding: const EdgeInsets.only(bottom: sizeExLarge),
                             itemBuilder: (BuildContext context, int index) {
-                              final filterArea = widget.areaItem!.filter![index];
+                              final filterArea =
+                                  widget.areaItem!.filter![index];
                               return Padding(
                                 padding:
                                     const EdgeInsets.only(bottom: sizeLarge),
@@ -182,12 +183,12 @@ class FilterPageState extends BaseState<FilterPage> {
   }
 
   Widget createDateRangeView(FilterState state, FilterArea filterArea) {
-    final String startDate =
-        state.filterOptSelected!.containsKey(filterArea.fid)
-            ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_START_DATE]
+    final String? startDate =
+        state.filterOptSelected.containsKey(filterArea.fid)
+            ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_START_DATE]
             : null;
-    final String endDate = state.filterOptSelected!.containsKey(filterArea.fid)
-        ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_END_DATE]
+    final String? endDate = state.filterOptSelected.containsKey(filterArea.fid)
+        ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_END_DATE]
         : null;
     return RangeDateView(
       itemFilter: filterArea,
@@ -197,7 +198,7 @@ class FilterPageState extends BaseState<FilterPage> {
             f.fid!,
             f.type!,
             f.key!,
-            startDate,
+            startDate ?? '',
             DateUtil.dateFormatYYYYMMdd(date,
                 format: DateUtil.DATE_FORMAT_DDMMYYYY)));
       },
@@ -208,7 +209,7 @@ class FilterPageState extends BaseState<FilterPage> {
           f.key!,
           DateUtil.dateFormatYYYYMMdd(date,
               format: DateUtil.DATE_FORMAT_DDMMYYYY),
-          endDate,
+          endDate??'',
         ));
       },
       startDate: (startDate != null && startDate.isNotEmpty)
@@ -223,8 +224,9 @@ class FilterPageState extends BaseState<FilterPage> {
   }
 
   Widget createSliderView(FilterState state, FilterArea filterArea) {
-    final defaultValue = state.filterOptSelected!.containsKey(filterArea.fid)
-        ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_VALUE]
+    final defaultValue = state.filterOptSelected != null &&
+            state.filterOptSelected.containsKey(filterArea.fid)
+        ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_VALUE]
         : 50.0;
     final maxValue = double.parse(filterArea.filterItem![1].number!);
     final minValue = double.parse(filterArea.filterItem![0].number!);
@@ -243,8 +245,8 @@ class FilterPageState extends BaseState<FilterPage> {
     final maxValue = double.parse(filterArea.filterItem![1].number!);
     final minValue = double.parse(filterArea.filterItem![0].number!);
     final Map<String, double> defaultValue =
-        state.filterOptSelected!.containsKey(filterArea.fid)
-            ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_VALUE]
+        state.filterOptSelected.containsKey(filterArea.fid)
+            ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_VALUE]
             : {
                 FILTER_KEY_VALUE_LEFT: (maxValue / 2) - (maxValue / 4),
                 FILTER_KEY_VALUE_RIGHT: (maxValue / 2) + (maxValue / 4)
@@ -261,8 +263,8 @@ class FilterPageState extends BaseState<FilterPage> {
   }
 
   Widget createSelectionView(FilterState state, FilterArea filterArea) {
-    final defaultValue = state.filterOptSelected!.containsKey(filterArea.fid)
-        ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_VALUE]
+    final defaultValue = state.filterOptSelected.containsKey(filterArea.fid)
+        ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_VALUE]
         : null;
     return SelectionView(
       itemFilter: filterArea,
@@ -274,8 +276,8 @@ class FilterPageState extends BaseState<FilterPage> {
 
   Widget createIconSingleSelectionView(
       FilterState state, FilterArea filterArea) {
-    final defaultValue = state.filterOptSelected!.containsKey(filterArea.fid)
-        ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_VALUE]
+    final defaultValue = state.filterOptSelected.containsKey(filterArea.fid)
+        ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_VALUE]
         : null;
     return IconSingleSelectionView(
       itemFilter: filterArea,
@@ -288,8 +290,8 @@ class FilterPageState extends BaseState<FilterPage> {
   Widget createIconMultiSelectionView(
       FilterState state, FilterArea filterArea) {
     final Map<int, FilterItem> defaultValue =
-        state.filterOptSelected!.containsKey(filterArea.fid)
-            ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_VALUE]
+        state.filterOptSelected.containsKey(filterArea.fid)
+            ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_VALUE]
             : null;
     return IconMultiSelectionView(
       itemFilter: filterArea,
@@ -300,9 +302,9 @@ class FilterPageState extends BaseState<FilterPage> {
   }
 
   Widget createMultiSelectionView(FilterState state, FilterArea filterArea) {
-    final Map<int, FilterItem> defaultValue =
-        state.filterOptSelected!.containsKey(filterArea.fid)
-            ? state.filterOptSelected![filterArea.fid]![FILTER_KEY_VALUE]
+    final Map<int, FilterItem>? defaultValue =
+                state.filterOptSelected.containsKey(filterArea.fid)
+            ? state.filterOptSelected[filterArea.fid]![FILTER_KEY_VALUE]
             : null;
     return MultiSelectionView(
       itemFilter: filterArea,

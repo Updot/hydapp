@@ -62,62 +62,62 @@ class EventBloc extends Bloc<EventEvent, EventState> {
           .fetchEvent(cate: cateId, stateDate: stateDate, endDate: endDate);
 
       if (result.isRight()) {
-        final listEvent = result.getOrElse(null!);
-
-        ///Sort by suitable name
-        // listEvent!.sort((a, b) {
-        //   if ((a!.suitable!.isNotEmpty ) &&
-        //       (b!.suitable!.isNotEmpty )) {
-        //     return a!.suitable[0].name!.toLowerCase()!.trim()!.compareTo(
-        //             b!.suitable[0].name!.toLowerCase()!.trim() ) ??
-        //         0;
-        //   }
-        //   return 0;
+        // final listEvent = result.getOrElse();
+        //
+        // ///Sort by suitable name
+        // // listEvent!.sort((a, b) {
+        // //   if ((a!.suitable!.isNotEmpty ) &&
+        // //       (b!.suitable!.isNotEmpty )) {
+        // //     return a!.suitable[0].name!.toLowerCase()!.trim()!.compareTo(
+        // //             b!.suitable[0].name!.toLowerCase()!.trim() ) ??
+        // //         0;
+        // //   }
+        // //   return 0;
+        // // });
+        //
+        // final groupEvents = <String, Map<String, List<EventInfo>>>{};
+        // state.eventCategories!.forEach((cate) {
+        //   final eventByCate =
+        //       listEvent.where((e) => e.category!.id == cate.id).toList();
+        //   var groupSuitables = <String, List<EventInfo>>{};
+        //   groupSuitables = groupBy(eventByCate, (e) {
+        //     if (e != null && e.suitable != null) {
+        //       return e.suitable!
+        //           .map((e) => e.name)
+        //           .toList()
+        //           .join(' ${Lang.event_and.tr()} ');
+        //     } else {
+        //       return '';
+        //     }
+        //   });
+        //
+        //   groupEvents[cate.id.toString()] = groupSuitables;
         // });
-
-        final groupEvents = <String, Map<String, List<EventInfo>>>{};
-        state.eventCategories!.forEach((cate) {
-          final eventByCate =
-              listEvent.where((e) => e.category!.id == cate.id).toList();
-          var groupSuitables = <String, List<EventInfo>>{};
-          groupSuitables = groupBy(eventByCate, (e) {
-            if (e != null && e.suitable != null) {
-              return e.suitable!
-                  .map((e) => e.name)
-                  .toList()
-                  .join(' ${Lang.event_and.tr()} ');
-            } else {
-              return '';
-            }
-          });
-
-          groupEvents[cate.id.toString()] = groupSuitables;
-        });
-
-        ///group by Category All
-        var groupSuitables = <String, List<EventInfo>>{};
-        groupSuitables = groupBy(listEvent, (e) {
-          if (e != null && e.suitable != null) {
-            return e.suitable!
-                .map((e) => e.name)
-                .toList()
-                .join(' ${Lang.event_and.tr()} ');
-          } else {
-            return '';
-          }
-        });
-        groupEvents[cateId] = groupSuitables;
-
-        if (listEvent.isEmpty) {
-          groupEvents.clear();
-        }
-        yield state.copyWith(
-            isRefreshing: false,
-            groupEvents: groupEvents,
-            currentFilterDate: event.filterDateModel,
-            startDate: event.startDate,
-            refreshTime: DateTime.now().toIso8601String(),
-            endDate: event.endDate);
+        //
+        // ///group by Category All
+        // var groupSuitables = <String, List<EventInfo>>{};
+        // groupSuitables = groupBy(listEvent, (e) {
+        //   if (e != null && e.suitable != null) {
+        //     return e.suitable!
+        //         .map((e) => e.name)
+        //         .toList()
+        //         .join(' ${Lang.event_and.tr()} ');
+        //   } else {
+        //     return '';
+        //   }
+        // });
+        // groupEvents[cateId] = groupSuitables;
+        //
+        // if (listEvent.isEmpty) {
+        //   groupEvents.clear();
+        // }
+        // yield state.copyWith(
+        //     isRefreshing: false,
+        //     groupEvents: groupEvents,
+        //     currentFilterDate: event.filterDateModel,
+        //     startDate: event.startDate,
+        //     refreshTime: DateTime.now().toIso8601String(),
+        //     endDate: event.endDate);
       } else {
         yield state.copyWith(
             isRefreshing: false,
@@ -144,7 +144,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
           element.value.removeWhere((event) =>
               !event.title!.toLowerCase().contains(keyWork) &&
               !event.pickOneLocation!.locationAt
-                  .toLowerCase()
+                  !.toLowerCase()
                   .contains(keyWork));
         });
         yield SearchResultState(

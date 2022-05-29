@@ -23,7 +23,7 @@ abstract class EventRemoteDataSource {
       String cate,
       Map<int, Map> filterAdv,
       dynamic filter,
-      String experId});
+      String? experId});
 
   Future<List<EventCategory>> fetchEventCategories();
 

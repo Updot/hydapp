@@ -60,7 +60,7 @@ class CommunityPost {
    String? caption;
    String? category;
    String? tagLocationId;
-   bool? isFavorite;
+   bool isFavorite = false;
    String? lat;
    String? long;
    List<ImageInfoData>? image;
@@ -76,7 +76,7 @@ class CommunityPost {
     this.author,
     this.category,
     this.tagLocationId,
-    this.isFavorite,
+    this.isFavorite = false,
     this.caption,
     this.lat,
     this.long,

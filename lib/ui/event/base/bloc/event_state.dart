@@ -89,16 +89,16 @@ class EventState extends Equatable {
 
   @override
   List<Object> get props => [
-        listFilterDates!,
-        sortType!,
-        startDate!,
-        isRefreshing!,
+        listFilterDates??'',
+        sortType??'',
+        startDate ?? DateTime.now(),
+        isRefreshing ?? false,
         currentEventCateId,
-        refreshTime!,
-        groupEvents!,
-        groupEvents!.length,
-        eventCategories!,
-        endDate!,
+        refreshTime ?? '',
+        groupEvents??'',
+        groupEvents?.length??'',
+        eventCategories??'',
+        endDate?? '',
       ];
 }
 

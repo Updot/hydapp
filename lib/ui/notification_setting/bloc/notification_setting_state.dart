@@ -37,10 +37,10 @@ class NotificationSettingState extends Equatable {
 
   @override
   List<Object> get props => [
-        notificationItemList!,
-        itemChanged!.toJson(),
-        errorMessage!,
-        success!,
-        itemChanged!
+        notificationItemList ?? '',
+        itemChanged?.toJson() ?? '',
+        errorMessage?? '',
+        success?? '',
+        itemChanged ?? ''
       ];
 }

@@ -28,7 +28,7 @@ class DeactivateAccountState extends Equatable {
   }
 
   @override
-  List<Object> get props => [moreItems!, status!, currentValue!];
+  List<Object> get props => [moreItems?? '', status ?? '', currentValue ?? ''];
 
   @override
   String toString() {

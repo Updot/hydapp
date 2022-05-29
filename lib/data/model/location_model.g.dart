@@ -9,11 +9,11 @@ part of 'location_model.dart';
 LocationModel _$LocationModelFromJson(Map<String, dynamic> json) {
   return LocationModel(
     id: json['id'] as int,
-    locationAt: json['location_at'] as String,
-    lat: json['lat'] as String,
-    long: json['long'] as String,
-    address: json['address'] as String,
-    title: json['title'] as String,
+    locationAt: json['location_at'],
+    lat: json['lat'] ,
+    long: json['long']?? "0",
+    address: json['address'],
+    title: json['title'],
   );
 }
 

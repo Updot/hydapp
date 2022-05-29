@@ -352,7 +352,7 @@ class EventDetailScreenState extends BaseState<EventDetailScreen> {
       locationModel: locationModel,
       markers: [
         {
-          'latitude': double.tryParse(locationModel.lat),
+          'latitude': double.tryParse(locationModel.lat ?? '0'),
           'longitude': double.tryParse(locationModel.long)
         },
       ],

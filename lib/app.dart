@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
+// import 'package:firebase_analytics/firebase_analytics.dart';
+// import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ import 'utils/my_custom_route.dart';
 class Application extends StatelessWidget {
   // This widget is the root of your application.
   static BuildContext? currentContext;
-  FirebaseAnalytics? analytics/* = FirebaseAnalytics()*/;
+  // FirebaseAnalytics? analytics/* = FirebaseAnalytics()*/;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class Application extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Hudayriyat Island',
           navigatorObservers: [
-            FirebaseAnalyticsObserver(analytics: analytics!),
+            // FirebaseAnalyticsObserver(analytics: analytics!),
           ],
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,

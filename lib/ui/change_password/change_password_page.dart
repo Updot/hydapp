@@ -235,7 +235,7 @@ class ChangePasswordScreenState extends BaseState<ChangePasswordScreen> {
     final errMessageNewPassWord = validatePassword(oldPassWord);
 
     //validate password
-    if (errMessageNewPassWord!.isNotEmpty) {
+    if (errMessageNewPassWord != null && errMessageNewPassWord.isNotEmpty) {
       UIUtil.showToast(
         errMessageNewPassWord,
         backgroundColor: Colors.red,
@@ -257,7 +257,7 @@ class ChangePasswordScreenState extends BaseState<ChangePasswordScreen> {
         validateRePassword(newPassWord, confirmNewPassWord);
 
     //validate password
-    if (errMessageNewPassWord!.isNotEmpty) {
+    if (errMessageNewPassWord != null && errMessageNewPassWord.isNotEmpty) {
       UIUtil.showToast(
         errMessageNewPassWord,
         backgroundColor: Colors.red,
@@ -266,7 +266,7 @@ class ChangePasswordScreenState extends BaseState<ChangePasswordScreen> {
     }
 
     //validate password and confirm password
-    if (errMessageConfirmPassWord!.isNotEmpty) {
+    if ( errMessageConfirmPassWord != null &&  errMessageConfirmPassWord.isNotEmpty) {
       UIUtil.showToast(
         errMessageConfirmPassWord,
         backgroundColor: Colors.red,

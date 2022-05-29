@@ -63,7 +63,7 @@ class AssetTitleGroup extends StatelessWidget {
                         fontFamily: MyFontFamily.graphik),
                   ),
                   const SizedBox(height: sizeSmallx),
-                  if (state!.assetDetail!.directUrl!.isNotEmpty)
+                  if (state!.assetDetail!.directUrl != null && state!.assetDetail!.directUrl!.isNotEmpty)
                     GestureDetector(
                       onTap: () {
                         if (state!.assetDetail!.directUrl!.isNotEmpty) {
@@ -210,7 +210,8 @@ class AssetTitleGroup extends StatelessWidget {
   Widget renderIconPhone() {
     return Row(
       children: [
-        if (state!.assetDetail!.mailTo!.isNotEmpty)
+        if (state!.assetDetail!.mailTo != null &&
+            state!.assetDetail!.mailTo!.isNotEmpty)
           GestureDetector(
             onTap: () {
               if (state!.assetDetail!.mailTo!.isNotEmpty) {
@@ -241,7 +242,8 @@ class AssetTitleGroup extends StatelessWidget {
             ),
           ),
         const SizedBox(width: sizeSmall),
-        if (state!.assetDetail!.phoneNumber!.isNotEmpty)
+        if (state!.assetDetail!.phoneNumber != null &&
+            state!.assetDetail!.phoneNumber!.isNotEmpty)
           GestureDetector(
             onTap: () {
               if (state!.assetDetail!.phoneNumber!.isNotEmpty) {

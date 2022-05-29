@@ -195,7 +195,7 @@ class ActivityDetailScreenState extends BaseState<ActivityDetailScreen> {
                                       onItemClickDirection: (e) {
                                         MapUtils.openMap(
                                             double.parse(
-                                                e.pickOneLocation!.lat),
+                                                e.pickOneLocation!.lat ?? '0'),
                                             double.parse(
                                                 e.pickOneLocation!.long));
                                       },

@@ -137,7 +137,7 @@ class AnimatedIconButton extends StatefulWidget {
   ///
   /// When not specified the [AnimatedIconButton] will change it's icons and
   /// background color whenever [AnimatedIconButton] is pressed.
-  final AnimationController? animationController;
+  final AnimationController animationController;
 
   /// The splash radius.
   ///
@@ -167,33 +167,33 @@ class AnimatedIconButton extends StatefulWidget {
     this.alignment,
     this.endBackgroundColor,
     this.startBackgroundColor,
-    this.animationController,
+    required this.animationController,
     this.splashRadius,
   });
   @override
   _AnimatedIconButtonState createState() => _AnimatedIconButtonState(
         size: this.size!,
-        startIcon: this.startIcon!,
-        endIcon: this.endIcon!,
-        duration: this.duration!,
+        startIcon: this.startIcon,
+        endIcon: this.endIcon,
+        duration: this.duration,
         onPressed: this.onPressed,
-        focusColor: this.focusColor!,
-        hoverColor: this.hoverColor!,
-        highlightColor: this.highlightColor!,
-        splashColor: this.splashColor!,
-        disabledColor: this.disabledColor!,
-        focusNode: this.focusNode!,
-        autofocus: this.autofocus!,
-        tooltip: this.tooltip!,
-        enableFeedback: this.enableFeedback!,
-        constraints: this.constraints!,
-        visualDensity: this.visualDensity!,
-        padding: this.padding!,
-        alignment: this.alignment!,
-        endBackgroundColor: this.endBackgroundColor!,
-        startBackgroundColor: this.startBackgroundColor!,
-        animationController: this.animationController!,
-        splashRadius: this.splashRadius!,
+        focusColor: this.focusColor,
+        hoverColor: this.hoverColor,
+        highlightColor: this.highlightColor,
+        splashColor: this.splashColor,
+        disabledColor: this.disabledColor,
+        focusNode: this.focusNode,
+        autofocus:  this.autofocus,
+        tooltip: this.tooltip,
+        enableFeedback: this.enableFeedback,
+        constraints: this.constraints,
+        visualDensity: this.visualDensity,
+        padding: this.padding,
+        alignment: this.alignment,
+        endBackgroundColor: this.endBackgroundColor,
+        startBackgroundColor: this.startBackgroundColor,
+        animationController: this.animationController,
+        splashRadius: this.splashRadius,
       );
 }
 
@@ -220,7 +220,7 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
     this.alignment = Alignment.center,
     this.endBackgroundColor,
     this.startBackgroundColor,
-    this.animationController,
+    required this.animationController,
     this.splashRadius,
   });
   double? size;
@@ -243,10 +243,10 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
   VisualDensity? visualDensity;
   EdgeInsets? padding;
   Alignment? alignment;
-  AnimationController? animationController;
+  AnimationController animationController;
   double? splashRadius;
 
-  bool? hasCustomAnimationController;
+  bool hasCustomAnimationController=false;
   Icon? nowIcon;
   Color? nowBackgroundColor;
   bool? isIconAnimated = false;
@@ -259,17 +259,17 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
   void initState() {
     hasCustomAnimationController = animationController != null;
 
-    if (hasCustomAnimationController!) {
+    if (hasCustomAnimationController) {
       assert(duration == null,
           'Duration must be null when defining an animationController');
-      duration = animationController!.duration;
+      duration = animationController.duration;
     }
 
-    _arrowAnimationController = hasCustomAnimationController!
+    _arrowAnimationController = hasCustomAnimationController
         ? animationController
         : AnimationController(vsync: this, duration: duration);
 
-    if (hasCustomAnimationController!) _addStatusListener();
+    if (hasCustomAnimationController) _addStatusListener();
 
     _arrowAnimation =
         Tween(begin: 0.0, end: 1.0).animate(_arrowAnimationController!);
@@ -327,10 +327,10 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
   IconButton buildIconButton() {
     return IconButton(
       iconSize: size ?? 30,
-      onPressed: hasCustomAnimationController!
-          ? onPressed!
+      onPressed: hasCustomAnimationController
+          ? onPressed
           : () {
-              onPressed!();
+              onPressed;
               _changeIcon();
               _changeBackgroundColor();
               _arrowAnimationController!.isCompleted
@@ -352,8 +352,8 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
       splashColor: splashColor,
       disabledColor: disabledColor,
       focusNode: focusNode,
-      autofocus: autofocus!,
-      enableFeedback: enableFeedback!,
+      autofocus: autofocus ?? false,
+      enableFeedback: enableFeedback?? false,
       tooltip: tooltip,
       constraints: constraints,
       visualDensity: visualDensity,

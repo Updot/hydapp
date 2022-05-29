@@ -12,7 +12,7 @@ import '../../../data/repository/static_content_repository.dart';
 class RegisterOptState extends Equatable {
   final bool? isEmailValid;
   final StaticContent? staticContent;
-  final bool? isPasswordValid;
+  final bool isPasswordValid;
   final bool? ableToLogin;
   final UserInfo? userInfo;
   final Country? countrySelected;
@@ -21,7 +21,7 @@ class RegisterOptState extends Equatable {
 
   RegisterOptState(
       {@required this.isEmailValid,
-      @required this.isPasswordValid,
+      this.isPasswordValid = false,
       this.staticContent,
       this.ableToLogin = false,
       this.countrySelected,
@@ -58,7 +58,7 @@ class RegisterOptState extends Equatable {
         maritalStatusSelected:
             maritalStatusSelected ?? this.maritalStatusSelected,
         ableToLogin: isLoginAble(isEmailValid ?? this.isEmailValid!,
-            isPasswordValid ?? this.isPasswordValid!));
+            isPasswordValid ?? this.isPasswordValid));
   }
 
   bool isLoginAble(bool isEmailValid, bool isPassValid) {
@@ -79,12 +79,12 @@ class RegisterOptState extends Equatable {
 
   @override
   List<Object> get props => [
-        isEmailValid!,
-        isPasswordValid!,
-        ableToLogin!,
-        staticContent!,
-        countrySelected!,
-        registerStatus!,
+        isEmailValid ?? false,
+        isPasswordValid,
+        ableToLogin?? '',
+        staticContent ??'',
+        countrySelected??'',
+        registerStatus??'',
         maritalStatusSelected!
       ];
 
