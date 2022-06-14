@@ -43,7 +43,7 @@ class AssetSeeAllBloc extends Bloc<AssetSeeAllEvent, AssetSeeAllState> {
       yield* assetSeeAllInteract!.handleAmenitiesAlsoLikeResult(assets, state);
     } else if (event is FetchAsset) {
       final assets = await assetRepository!.fetchAmenities(
-          experiId: event.experienceId!.toString(),
+          experiId: event.experienceId?.toString() ?? '',
           filterAdv: event.filterAdv ?? {},
           filter: event.facilitesId,
           viewAssetType: event.viewAssetType!);

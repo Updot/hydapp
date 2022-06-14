@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:marvista/data/source/api_end_point.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
@@ -409,7 +410,7 @@ class _MenuProfileDialogState extends State<MenuProfileDialog> {
         context: context,
         builder: (context) => CupertinoPickerPhotoView(
               onSelectPhoto: onSelectPhoto,
-              onSelectPhotos: (List<String> path) {},
+              onSelectPhotos: (List<String> path) {}, imagePicker: ImagePicker(),
             ));
   }
 

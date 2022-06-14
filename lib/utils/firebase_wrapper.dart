@@ -295,7 +295,7 @@ class FirebaseWrapper {
 
   Future<void> subscribeToTopic(String topic) async {
     print('subscribeToTopic ' + topic);
-    await messaging!.subscribeToTopic(topic);
+    await messaging?.subscribeToTopic(topic);
   }
 
   Future<void> unsubscribeFromTopic(String topic) async {

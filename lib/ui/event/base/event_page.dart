@@ -62,8 +62,8 @@ class EventScreenState extends BaseState<EventScreen> {
             child: EventDatePickerDialog(
               filterDates: state.listFilterDates!,
               currentFilterDate: state.currentFilterDate!,
-              startDate: state.startDate!,
-              endDate: state.endDate!,
+              startDate: state.startDate ?? DateTime.now(),
+              endDate: state.endDate ?? DateTime.now(),
             ),
             context: context)
         .then((value) {
@@ -156,7 +156,7 @@ class EventScreenState extends BaseState<EventScreen> {
                                     focusNode: _searchFocusNode,
                                     onSubmit: _onSearchChanged,
                                     cusPreIcon: _getSearchButton(state),
-                                    cusSubIcon: _getClearButton(state),
+                                    // cusSubIcon: _getClearButton(state),
                                     textAlign: TextAlign.start,
                                     hintStyle: textSmallx.copyWith(
                                         color: const Color(0xffb9b9b9),

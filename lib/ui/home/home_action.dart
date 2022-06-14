@@ -151,7 +151,7 @@ extension HomeAction on _HomePageState {
     showCupertinoModalPopup(
         context: context,
         builder: (context) =>
-            CupertinoPickerPhotoView(onSelectPhoto: onSelectPhoto));
+            CupertinoPickerPhotoView(onSelectPhoto: onSelectPhoto, imagePicker: ImagePicker(),));
   }
 
   void onWriteReview() {

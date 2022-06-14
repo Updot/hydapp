@@ -2,8 +2,8 @@ part of 'register_opt_page.dart';
 
 extension RegisterOtpAction on _RegisterOptPageState {
   Future<void> _handleGoogleSignIn(RegisterOptState state) async {
-    await _pbLoading!
-        .show(msg: Lang.started_loading_please_wait.tr(), max: 100);
+    // await _pbLoading!
+    //     .show(msg: Lang.started_loading_please_wait.tr(), max: 100);
     try {
       final socialLoginDataResult = await _firebaseWrapper.handleGoogleSignIn();
       socialLoginDataResult.fold((l) {
@@ -12,8 +12,8 @@ extension RegisterOtpAction on _RegisterOptPageState {
       }, (socialLoginData) {
         if (socialLoginData.email != null) {
           _registerOptBloc.add(RegisterByEmail(
-              firstName: socialLoginData.firstName,
-              lastName: socialLoginData.lastName,
+              firstName: socialLoginData.firstName?? socialLoginData.name,
+              lastName: socialLoginData.lastName ?? '',
               socialId: socialLoginData.id,
               dob: DateTime.now()
                   .subtract(const Duration(days: 365 * 13 + 4))
@@ -21,10 +21,10 @@ extension RegisterOtpAction on _RegisterOptPageState {
               hasSocialEmail: 1,
               type: getTypeByEnum(RegisterEnum.GOOGLE),
               email: socialLoginData.email,
-              maritalId: state.maritalStatusSelected!.id.toString(),
-              dialCode: state.countrySelected!.dialCode));
+              maritalId: state.maritalStatusSelected?.id.toString(),
+              dialCode: state.countrySelected?.dialCode));
         } else {
-          _pbLoading!.close();
+          _pbLoading?.close();
           NavigateUtil.openPage(context, RegisterPage.routeName,
               argument: {'type': RegisterEnum.GOOGLE, 'data': socialLoginData});
         }
@@ -84,7 +84,7 @@ extension RegisterOtpAction on _RegisterOptPageState {
         if (socialLoginData.email != null) {
           var firstName = socialLoginData.firstName;
           var lastName = socialLoginData.lastName;
-          if (firstName.isEmpty && lastName.isEmpty) {
+          if (firstName != null && firstName.isEmpty && lastName != null && lastName.isEmpty) {
             firstName = socialLoginData.email.split('@')[0];
             lastName =
                 socialLoginData.email.split('@')[1].replaceAll('.com', '');

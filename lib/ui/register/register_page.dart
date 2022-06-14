@@ -82,13 +82,13 @@ class _RegisterPageState extends BaseState<RegisterPage> {
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
     _confirmPasswordController.addListener(_onConfirmPasswordChanged);
-
+    _pbLoading = ProgressDialog(context: context);
     fToast = FToast();
     fToast!.init(context);
 
     if (widget.socialLoginData != null) {
-      _firstNameController.text = widget.socialLoginData!.firstName;
-      _lastNameController.text = widget.socialLoginData!.lastName;
+      _firstNameController.text = widget.socialLoginData!.firstName!;
+      _lastNameController.text = widget.socialLoginData!.lastName!;
       _emailController.text = widget.socialLoginData!.email;
       if (widget.socialLoginData!.email.isNotEmpty) {
         _registerBloc.add(HasSocialEmail());
@@ -97,7 +97,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
 
     _registerBloc.listen((state) {
       if (state.registerStatus != null) {
-        _pbLoading!.close();
+        _pbLoading?.close();
         FocusScope.of(context).requestFocus(FocusNode());
         switch (state.registerStatus) {
           case RegisterStatus.registerSuccess:
@@ -126,6 +126,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
             break;
           case RegisterStatus.alreadyRegister:
             // NavigateUtil.replacePage(context, LoginPage.routeName);
+            _pbLoading?.close();
             _showToast(Lang.register_register_existed.tr());
             return;
           case RegisterStatus.failed:
@@ -136,8 +137,8 @@ class _RegisterPageState extends BaseState<RegisterPage> {
       } else if (state.currentRoute == RegisterRoute.popBack) {
         FocusScope.of(context).requestFocus(FocusNode());
         NavigateUtil.pop(context);
-      } else if (_pbLoading!.isOpen()) {
-        _pbLoading!.close();
+      } else if ( _pbLoading!= null && _pbLoading!.isOpen()) {
+        _pbLoading?.close();
       }
     });
     _registerBloc.add(LoadCountryCode());
@@ -151,7 +152,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    _pbLoading = ProgressDialog(context: context);
+    // _pbLoading = ProgressDialog(context: context);
     return makeParent(Container(
       color: const Color(0xffFDFBF5),
       child: SafeArea(
@@ -495,7 +496,7 @@ class _RegisterPageState extends BaseState<RegisterPage> {
       _showToast(Lang.register_please_fill_all_fields.tr());
       return;
     }
-    _pbLoading!.show(msg: Lang.started_loading_please_wait.tr(), max: 100);
+    _pbLoading?.show(msg: Lang.started_loading_please_wait.tr(), max: 100);
     _registerBloc.add(RegisterButtonPressed(
         firstName: _firstNameController.text,
         lastName: _lastNameController.text,
@@ -677,8 +678,8 @@ class _RegisterPageState extends BaseState<RegisterPage> {
   ///Check validate pinCode data and submit to Server
   void doSubmitPinCode() {
     final code = pinCodeData;
-    final errMessageCode = validateCodePassword(code!);
-    if (code.isNotEmpty && (errMessageCode!.isEmpty)) {
+    final errMessageCode = validateCodePassword(code!) ?? '';
+    if (code.isNotEmpty && ( errMessageCode.isEmpty)) {
       _pbLoading!.show(msg: Lang.started_loading_please_wait.tr(), max: 100);
       _registerBloc.add(SubmitVerifyCode(
           code: code, tokenCode: _registerBloc.state.tokenCode));

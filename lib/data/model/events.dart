@@ -49,7 +49,6 @@ class EventInfo {
       this.type});
 
   EventInfo.fromJson(Map<String, dynamic> json) {
-    try {
       id = json['id'];
       name = json['name'];
       distance = json['distance'];
@@ -94,9 +93,6 @@ class EventInfo {
       note = json['note'];
       shareUrl = json['share_url'];
       type = json['type'];
-    } catch (e, stacktrace) {
-      LogUtils.d(e, stacktrace: stacktrace.toString());
-    }
   }
 
   Map<String, dynamic> toJson() {

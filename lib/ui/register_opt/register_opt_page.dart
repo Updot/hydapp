@@ -123,49 +123,49 @@ class _RegisterOptPageState extends BaseState<RegisterOptPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Material(
-                    elevation: sizeVerySmall,
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(sizeNormalx)),
-                    color: const Color(0xff3B5998),
-                    child: InkWell(
-                      onTap: () {
-                        _handleFacebookSignIn(state);
-                      },
-                      splashColor: Colors.white.withAlpha(100),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(sizeNormalx)),
-                      child: Container(
-                          padding: const EdgeInsets.only(
-                              left: sizeNormal, right: sizeSmall),
-                          height: sizeLargexx,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              MyTextView(
-                                text: Lang.login_sign_up_with_facebook.tr(),
-                                textStyle:
-                                    textSmallxxx.copyWith(color: Colors.white),
-                              ),
-                              RawMaterialButton(
-                                constraints: const BoxConstraints(
-                                    maxWidth: sizeNormalx,
-                                    maxHeight: sizeNormalx,
-                                    minWidth: sizeNormalx,
-                                    minHeight: sizeNormalx),
-                                fillColor: Colors.white,
-                                shape: const CircleBorder(),
-                                onPressed: () {},
-                                child: const FaIcon(
-                                  FontAwesomeIcons.facebookF,
-                                  size: sizeSmallxxx,
-                                  color: Color(0xff929292),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ),
+                  // Material(
+                  //   elevation: sizeVerySmall,
+                  //   borderRadius:
+                  //       const BorderRadius.all(Radius.circular(sizeNormalx)),
+                  //   color: const Color(0xff3B5998),
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       _handleFacebookSignIn(state);
+                  //     },
+                  //     splashColor: Colors.white.withAlpha(100),
+                  //     borderRadius:
+                  //         const BorderRadius.all(Radius.circular(sizeNormalx)),
+                  //     child: Container(
+                  //         padding: const EdgeInsets.only(
+                  //             left: sizeNormal, right: sizeSmall),
+                  //         height: sizeLargexx,
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: <Widget>[
+                  //             MyTextView(
+                  //               text: Lang.login_sign_up_with_facebook.tr(),
+                  //               textStyle:
+                  //                   textSmallxxx.copyWith(color: Colors.white),
+                  //             ),
+                  //             RawMaterialButton(
+                  //               constraints: const BoxConstraints(
+                  //                   maxWidth: sizeNormalx,
+                  //                   maxHeight: sizeNormalx,
+                  //                   minWidth: sizeNormalx,
+                  //                   minHeight: sizeNormalx),
+                  //               fillColor: Colors.white,
+                  //               shape: const CircleBorder(),
+                  //               onPressed: () {},
+                  //               child: const FaIcon(
+                  //                 FontAwesomeIcons.facebookF,
+                  //                 size: sizeSmallxxx,
+                  //                 color: Color(0xff929292),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         )),
+                  //   ),
+                  // ),
                   const SizedBox(height: sizeNormal),
                   Material(
                     elevation: sizeVerySmall,
@@ -212,50 +212,50 @@ class _RegisterOptPageState extends BaseState<RegisterOptPage> {
                     ),
                   ),
                   const SizedBox(height: sizeNormal),
-                  if (Platform.isIOS)
-                    Material(
-                      elevation: sizeVerySmall,
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(sizeNormalx)),
-                      color: Colors.black,
-                      child: InkWell(
-                        onTap: () {
-                          _handleAppleSignIn(state);
-                        },
-                        splashColor: Colors.white.withAlpha(100),
-                        borderRadius: const BorderRadius.all(
-                            Radius.circular(sizeNormalx)),
-                        child: Container(
-                            padding: const EdgeInsets.only(
-                                left: sizeNormal, right: sizeSmall),
-                            height: sizeLargexx,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                MyTextView(
-                                  text: Lang.login_sign_up_with_apple.tr(),
-                                  textStyle: textSmallxxx.copyWith(
-                                      color: Colors.white),
-                                ),
-                                RawMaterialButton(
-                                  onPressed: () {},
-                                  constraints: const BoxConstraints(
-                                      maxWidth: sizeNormalx,
-                                      maxHeight: sizeNormalx,
-                                      minWidth: sizeNormalx,
-                                      minHeight: sizeNormalx),
-                                  fillColor: Colors.white,
-                                  shape: const CircleBorder(),
-                                  child: const FaIcon(
-                                    FontAwesomeIcons.apple,
-                                    size: sizeNormal,
-                                    color: Colors.black,
-                                  ),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
+                  // if (Platform.isIOS)
+                  //   Material(
+                  //     elevation: sizeVerySmall,
+                  //     borderRadius:
+                  //         const BorderRadius.all(Radius.circular(sizeNormalx)),
+                  //     color: Colors.black,
+                  //     child: InkWell(
+                  //       onTap: () {
+                  //         _handleAppleSignIn(state);
+                  //       },
+                  //       splashColor: Colors.white.withAlpha(100),
+                  //       borderRadius: const BorderRadius.all(
+                  //           Radius.circular(sizeNormalx)),
+                  //       child: Container(
+                  //           padding: const EdgeInsets.only(
+                  //               left: sizeNormal, right: sizeSmall),
+                  //           height: sizeLargexx,
+                  //           child: Row(
+                  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //             children: <Widget>[
+                  //               MyTextView(
+                  //                 text: Lang.login_sign_up_with_apple.tr(),
+                  //                 textStyle: textSmallxxx.copyWith(
+                  //                     color: Colors.white),
+                  //               ),
+                  //               RawMaterialButton(
+                  //                 onPressed: () {},
+                  //                 constraints: const BoxConstraints(
+                  //                     maxWidth: sizeNormalx,
+                  //                     maxHeight: sizeNormalx,
+                  //                     minWidth: sizeNormalx,
+                  //                     minHeight: sizeNormalx),
+                  //                 fillColor: Colors.white,
+                  //                 shape: const CircleBorder(),
+                  //                 child: const FaIcon(
+                  //                   FontAwesomeIcons.apple,
+                  //                   size: sizeNormal,
+                  //                   color: Colors.black,
+                  //                 ),
+                  //               )
+                  //             ],
+                  //           )),
+                  //     ),
+                  //   ),
                   if (Platform.isIOS) const SizedBox(height: sizeNormalxx),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

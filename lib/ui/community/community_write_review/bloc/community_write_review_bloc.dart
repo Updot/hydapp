@@ -46,7 +46,7 @@ class CommunityWriteReviewBloc
       yield state.copyWith(listImageSelected: mapFilter);
     } else if (event is SubmitWriteReview) {
       final file = <File>[];
-      state.listImageSelected!.entries.toList().forEach((element) {
+      state.listImageSelected?.entries.toList().forEach((element) {
         file.add(File(element.key));
       });
       if (file.isNotEmpty) {

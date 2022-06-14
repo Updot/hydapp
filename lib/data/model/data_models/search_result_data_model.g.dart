@@ -8,16 +8,16 @@ part of 'search_result_data_model.dart';
 
 SearchResultDataModel _$SearchResultDataModelFromJson(
     Map<String, dynamic> json) {
+  final eventList = json['events'] as List;
+  final amenitiesList = json['amenities'] as List;
+  final eventListModel = eventList.map((e) => EventInfo.fromJson(e)).toList();
+  final amentiesListModel = amenitiesList.map((e) {
+    print(e);
+    return PlaceModel.fromJson(e);
+  }).toList();
+  print(amenitiesList);
   return SearchResultDataModel(
-    events: (json['events'])
-        .map((e) =>
-            e == null ? null : EventInfo.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    amenities: (json['amenities'])
-        .map((e) =>
-            e == null ? null : PlaceModel.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
+      events: eventListModel, amenities: amentiesListModel);
 }
 
 Map<String, dynamic> _$SearchResultDataModelToJson(

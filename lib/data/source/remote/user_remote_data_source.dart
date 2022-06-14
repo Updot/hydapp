@@ -232,7 +232,7 @@ class UserRemoteDataSourceImpl extends RemoteBaseImpl
           }
           return RegisterInfo.fromJson(responseData.data);
         } else {
-          return RegisterInfo.fromJson(null as Map<String, dynamic>);
+          return RegisterInfo.fromJson(null);
         }
       } else if (responseData.statusCode == CODE_CUSTOM_ACTIVATE_ACCOUNT) {
         final Map data = responseData.data;

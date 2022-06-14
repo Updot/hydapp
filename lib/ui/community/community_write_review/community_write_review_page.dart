@@ -9,6 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:marvista/common/widget/search_empty_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -767,7 +768,7 @@ class CommunityWriteReviewPageState extends BaseState<CommunityWriteReviewPage>
         context: context,
         builder: (context) => CupertinoPickerPhotoView(
               onSelectPhotos: onSelectPhotos,
-              onSelectPhoto: (String path) {},
+              onSelectPhoto: (String path) {}, imagePicker: ImagePicker(),
             ));
   }
 

@@ -81,7 +81,7 @@ class EventDetailScreenState extends BaseState<EventDetailScreen> {
           create: (_) => _eventDetailBloc,
           child: BlocBuilder<EventDetailBloc, EventDetailState>(
               builder: (context, state) {
-            if (state.eventDetailInfo == null || state.isRefreshing!) {
+            if (state.eventDetailInfo == null || state.isRefreshing) {
               return SafeArea(
                 child: Center(
                   child: Shimmer.fromColors(

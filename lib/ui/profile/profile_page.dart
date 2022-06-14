@@ -271,7 +271,7 @@ class _ProfilePageState extends BaseState<ProfilePage> {
       case MORE_KEY_LOGOUT:
         if (_profileBloc.state.userInfo!.isUser()) {
           final firebaseWrapper = sl<FirebaseWrapper>();
-          await firebaseWrapper.signOut();
+          // await firebaseWrapper.signOut();
         }
         sl<BaseBloc>().add(Logout());
         break;

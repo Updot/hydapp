@@ -52,8 +52,8 @@ class SettingsPageState extends BaseState<SettingsPage> with AfterLayoutMixin {
 
   void initBasicInfo() {
     _settingsBloc.listen((state) {
-      if (_pbLoading!.isOpen()) {
-        _pbLoading!.close();
+      if (_pbLoading != null && _pbLoading!.isOpen()) {
+        _pbLoading?.close();
       }
     });
     _settingsBloc.add(LoadLanguage());
@@ -62,8 +62,8 @@ class SettingsPageState extends BaseState<SettingsPage> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    _pbLoading = ProgressDialog(context: context);
-    // _pbLoading!.style(message: Lang.started_loading_please_wait.tr());
+    // _pbLoading = ProgressDialog(context: context);
+    // _pbLoading?.show(msg: Lang.started_loading_please_wait.tr(), max: 100);
     return Container(
       color: const Color(0xffFDFBF5),
       child: SafeArea(
@@ -199,8 +199,8 @@ class SettingsPageState extends BaseState<SettingsPage> with AfterLayoutMixin {
   }
 
   void onSelectedLanguage(Language? language) {
-    if (context.locale.languageCode.toUpperCase() != language!.code) {
-      _pbLoading!.show(max: 100, msg: Lang.started_loading_please_wait.tr());
+    if (language!= null && context.locale.languageCode.toUpperCase() != language.code) {
+      _pbLoading?.show(max: 100, msg: Lang.started_loading_please_wait.tr());
       hasChangeLang = true;
       changeLang(language);
       _settingsBloc.add(OnChangeLanguage(language: language));

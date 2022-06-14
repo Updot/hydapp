@@ -14,7 +14,7 @@ import '../../../utils/ui_util.dart';
 @immutable
 class EventsList extends StatelessWidget {
   final String? title;
-  final List<EventInfo>? listActivities;
+  final List<EventInfo?>? listActivities;
   final Function(EventInfo value)? onItemClick;
   final Function(EventInfo value)? onRemovePost;
   final Function(EventInfo value)? onTurnOffPost;
@@ -73,9 +73,9 @@ class EventsList extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return CardEventItem(
                   eventInfo: listActivities![index],
-                  onItemClick: onItemClick!,
-                  onRemovePost: onRemovePost!,
-                  onTurnOffPost: onTurnOffPost!,
+                  onItemClick: onItemClick,
+                  onRemovePost: onRemovePost,
+                  onTurnOffPost: onTurnOffPost,
                 );
               }))
     ]);

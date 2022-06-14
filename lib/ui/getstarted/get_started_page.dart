@@ -49,7 +49,7 @@ class StartedScreenState extends BaseState<StartedScreen>
     //Call this method first when LoginScreen init
     initBasicInfo();
     _startedBloc.listen((state) {
-      _pbLoading!.close();
+      _pbLoading?.close();
       if (state is StartedState && state.guestLoginSuccess) {
         NavigateUtil.openPage(context, MainScreen.routeName);
       }
@@ -74,8 +74,8 @@ class StartedScreenState extends BaseState<StartedScreen>
   }
 
   void onSelectedLanguage(Language? language) {
-    if (_startedBloc.state.selectedLanguage != language!.code) {
-      _pbLoading!.show(max: 100, msg: Lang.started_loading_please_wait.tr());
+    if (language!= null&& _startedBloc.state.selectedLanguage != language.code) {
+      _pbLoading?.show(max: 100, msg: Lang.started_loading_please_wait.tr());
       changeLang(language);
       _startedBloc.add(OnChangeLanguage(language: language));
     }
@@ -83,8 +83,8 @@ class StartedScreenState extends BaseState<StartedScreen>
 
   @override
   Widget build(BuildContext context) {
-    _pbLoading = ProgressDialog(context: context);
-    // _pbLoading!.style(message: Lang.started_loading_please_wait.tr());
+    // _pbLoading = ProgressDialog(context: context);
+    // _pbLoading!.show(msg: Lang.started_loading_please_wait.tr(), max: 100);
     return Scaffold(
       body: BlocProvider(
         create: (_) => _startedBloc,
@@ -153,7 +153,7 @@ class StartedScreenState extends BaseState<StartedScreen>
                             MyTextView(
                                 onTap: () {
                                   print("Guest");
-                                  _pbLoading!.show(
+                                  _pbLoading?.show(
                                       msg:
                                           Lang.started_loading_please_wait.tr(),
                                       max: 100);

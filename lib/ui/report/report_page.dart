@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
 import '../../common/di/injection/injector.dart';
@@ -424,7 +425,7 @@ class ReportPageState extends BaseState<ReportPage> {
     showCupertinoModalPopup(
         context: context,
         builder: (context) => CupertinoPickerPhotoView(
-            onSelectPhotos: onSelectPhotos, onSelectPhoto: onSelectPhoto));
+            onSelectPhotos: onSelectPhotos, onSelectPhoto: onSelectPhoto, imagePicker: ImagePicker(),));
   }
 
   void submitReport(ReportState state) {

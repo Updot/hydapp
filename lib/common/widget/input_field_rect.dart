@@ -10,7 +10,7 @@ class InputFieldRect extends StatelessWidget {
   final Function(String)? onSubmit;
   final void Function()? onTap;
   final void Function()? onEditingComplete;
-  final dynamic cusSubIcon, cusPreIcon;
+  final Widget? cusSubIcon, cusPreIcon;
 
   final TextEditingController? controller;
   final FocusNode? focusNode;

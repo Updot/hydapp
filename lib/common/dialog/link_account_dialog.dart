@@ -79,6 +79,7 @@ class _LinkAccountDialogState extends State<LinkAccountDialog> {
         ),
       ),
       insetMargin: const EdgeInsets.all(sizeNormal),
+      positionDialog: PositionDialog.topCenter,
     );
   }
 

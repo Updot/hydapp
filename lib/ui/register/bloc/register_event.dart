@@ -106,7 +106,7 @@ class SubmitVerifyCode extends RegisterEvent {
 }
 
 class DoLogin extends RegisterEvent {
-  final String accessToken;
+  final String? accessToken;
 
   DoLogin(this.accessToken);
 }

@@ -90,18 +90,18 @@ class ForgotPasswordState extends Equatable {
 
   @override
   List<Object> get props => [
-        timeResend!,
-        email!,
-        tokenCode!,
-        currentRoute!,
-        forgotPasswordStatus!,
-        isPasswordMatched!,
-        isPasswordValid!,
-        hasUppercase!,
-        hasDigits!,
-        hasSpecialCharacters!,
-        hasMinLength!,
-        errMessage!
+        timeResend ?? '',
+        email?? '',
+        tokenCode ?? '',
+        currentRoute?? '',
+        forgotPasswordStatus ??'',
+        isPasswordMatched?? '',
+        isPasswordValid?? '',
+        hasUppercase?? '',
+        hasDigits?? '',
+        hasSpecialCharacters?? '',
+        hasMinLength ?? '',
+        errMessage?? ''
       ];
 
   @override

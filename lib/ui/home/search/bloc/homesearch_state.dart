@@ -14,10 +14,10 @@ abstract class HomeSearchState extends Equatable {
 
   @override
   List<Object> get props => [
-        experienceId!,
-        recentModels!,
-        recentTodayModels!,
-        recentYesModels!,
+        experienceId ?? '',
+        recentModels?? '',
+        recentTodayModels?? '',
+        recentYesModels ?? '',
       ];
 }
 
@@ -83,7 +83,7 @@ class Searching extends GetSearchRecentEventSuccess {
 }
 
 class HomeSearchSuccess extends GetSearchRecentEventSuccess {
-  final List<EventInfo>? events;
+  final List<EventInfo?>? events;
   final String? keyword;
   final List<PlaceModel>? amenities;
 

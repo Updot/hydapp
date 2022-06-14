@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import 'package:marvista/common/widget/my_social_media.dart';
 import 'package:marvista/data/source/api_end_point.dart';
@@ -538,7 +539,7 @@ class _HomePageState extends BaseState<HomePage> with AfterLayoutMixin {
         argument: item);
   }
 
-  Widget _getClearButton(state) {
+  Widget? _getClearButton(state) {
     if (_homeSearchBloc.state is HomeSearchDisplayed) {
       return GestureDetector(
         onTap: onClearSearch,
@@ -547,12 +548,12 @@ class _HomePageState extends BaseState<HomePage> with AfterLayoutMixin {
           child: Icon(
             Icons.clear,
             color: Colors.black,
-            size: sizeNormal,
+            size: sizeSmallxxxx,
           ),
         ),
       );
     }
-    return Container();
+    return null;
   }
 
   Widget _getSearchButton(HomeState state) {
@@ -672,24 +673,20 @@ class _HomePageState extends BaseState<HomePage> with AfterLayoutMixin {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: sizeLargex,
-                          child: InputFieldRect(
-                            controller: _controllerSearch,
-                            focusNode: _searchFocusNode,
-                            onSubmit: onSubmitSearchKeyword,
-                            cusPreIcon: _getSearchButton(state),
-                            cusSubIcon: _getClearButton(state),
-                            textAlign: TextAlign.start,
-                            borderColor: Colors.transparent,
-                            borderRadius: sizeSmall,
-                            hintStyle: textSmallx.copyWith(
-                                color: const Color(0xffb9b9b9),
-                                fontWeight: MyFontWeight.regular),
-                            textStyle: textSmallx.copyWith(color: Colors.black),
-                            hintText: Lang.home_looking_for_something.tr(),
-                          ),
+                        child: InputFieldRect(
+                          controller: _controllerSearch,
+                          focusNode: _searchFocusNode,
+                          onSubmit: onSubmitSearchKeyword,
+                          cusPreIcon: _getSearchButton(state),
+                          cusSubIcon: _getClearButton(state),
+                          textAlign: TextAlign.start,
+                          borderColor: Colors.transparent,
+                          borderRadius: sizeSmall,
+                          hintStyle: textSmallx.copyWith(
+                              color: const Color(0xffb9b9b9),
+                              fontWeight: MyFontWeight.regular),
+                          textStyle: textSmallx.copyWith(color: Colors.black),
+                          hintText: Lang.home_looking_for_something.tr(),
                         ),
                       ),
                       if (hasFilter)

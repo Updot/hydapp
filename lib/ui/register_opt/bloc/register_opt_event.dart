@@ -42,7 +42,7 @@ class PasswordChanged extends RegisterOptEvent {
 class LoadCountryCode extends RegisterOptEvent {}
 
 class DoLogin extends RegisterOptEvent {
-  final String accessToken;
+  final String? accessToken;
 
   DoLogin(this.accessToken);
 }

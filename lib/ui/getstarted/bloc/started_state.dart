@@ -30,7 +30,7 @@ class StartedState {
   StartedState copyWith({
     int? indexContent,
     StaticContent? staticContent,
-    required bool guestLoginSuccess,
+     bool? guestLoginSuccess,
     String? selectedLanguage,
     List<Language>? arrLanguage,
   }) {
@@ -38,7 +38,7 @@ class StartedState {
       staticContent: staticContent ?? this.staticContent,
       arrLanguage: arrLanguage ?? this.arrLanguage,
       selectedLanguage: selectedLanguage ?? this.selectedLanguage,
-      guestLoginSuccess: guestLoginSuccess,
+      guestLoginSuccess: guestLoginSuccess ?? false,
       currentIndexContent: indexContent ?? currentIndexContent,
     );
   }
@@ -85,11 +85,11 @@ class StartedState {
   }
 
   List<Object> get props => [
-        staticContent!,
+        staticContent ?? '',
         guestLoginSuccess,
-        currentIndexContent!,
-        selectedLanguage!,
-        arrLanguage!
+        currentIndexContent?? '',
+        selectedLanguage ?? '',
+        arrLanguage ?? ''
       ];
 
   @override

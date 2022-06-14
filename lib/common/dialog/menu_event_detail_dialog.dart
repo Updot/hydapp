@@ -182,7 +182,10 @@ class MenuEventDetailDialog extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 NavigateUtil.pop(context);
-                onReportIssue!();
+                if(onReportIssue != null){
+                  onReportIssue!();
+                }
+
               },
               child: Row(
                 children: [

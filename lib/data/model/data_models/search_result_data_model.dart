@@ -14,7 +14,7 @@ class SearchResultDataModel {
   });
 
   @JsonKey(name: 'events')
-  final List<EventInfo> events;
+  final List<EventInfo?> events;
   @JsonKey(name: 'amenities')
   final List<PlaceModel> amenities;
   // @JsonKey(name: 'communities')

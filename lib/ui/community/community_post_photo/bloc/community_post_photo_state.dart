@@ -44,11 +44,11 @@ class CommunityPostPhotoState extends Equatable {
 
   @override
   List<Object> get props => [
-        currentRoute!,
-        pathImage!,
-        selectedAmenity!,
-        amenities!,
-        isRefreshing!,
+        currentRoute ?? '',
+        pathImage ?? '',
+        selectedAmenity ?? '',
+        amenities ?? '',
+        isRefreshing ?? '',
       ];
 
   @override

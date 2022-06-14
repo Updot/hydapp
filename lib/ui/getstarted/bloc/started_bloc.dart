@@ -61,7 +61,7 @@ class StartedBloc extends Bloc<StartedEvent, StartedState> {
       await personalizeRepository!.fetchListPersonalizeItems();
       await helpAndReportRepository!.fetchHelpItems();
       await helpAndReportRepository!.fetchReportItems();
-      yield state.copyWith(selectedLanguage: event.language!.code, guestLoginSuccess: false);
+      yield state.copyWith(selectedLanguage: event.language?.code, guestLoginSuccess: false);
       add(LoadStartedContent());
     }
   }

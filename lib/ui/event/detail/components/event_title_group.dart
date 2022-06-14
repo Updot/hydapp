@@ -253,7 +253,7 @@ class EventTitleGroup extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: sizeSmall),
-                        if (state!.eventDetailInfo!.directUrl!.isNotEmpty)
+                        if (state!.eventDetailInfo!.directUrl != null && state!.eventDetailInfo!.directUrl!.isNotEmpty)
                           Expanded(
                             child: GestureDetector(
                               onTap: () {

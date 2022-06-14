@@ -6,7 +6,7 @@ import '../theme/theme.dart';
 class NormalDialogTemplate {
   static Widget makeTemplate(
     Widget child, {
-    PositionDialog? positionDialog,
+    required PositionDialog positionDialog,
     Color? backgroundColor,
     EdgeInsets? insetPadding,
     Function? onDismiss,
@@ -18,7 +18,7 @@ class NormalDialogTemplate {
       children: <Widget>[
         Positioned.fill(
           child: Align(
-            alignment: _getPositionDialog(positionDialog!),
+            alignment: _getPositionDialog(positionDialog),
             child: useDragDismiss
                 ? Dismissible(
                     key: key!,
@@ -91,7 +91,7 @@ class NormalDialogTemplate {
     }
   }
 
-  static Alignment _getPositionDialog(PositionDialog positionDialog) {
+  static Alignment _getPositionDialog(PositionDialog? positionDialog) {
     switch (positionDialog) {
       case PositionDialog.topCenter:
         return Alignment.topCenter;

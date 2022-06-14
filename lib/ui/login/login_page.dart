@@ -63,8 +63,8 @@ class _LoginPageState extends BaseState<LoginPage> {
       builder: (BuildContext context) => LinkAccountDialog(
         email: email,
         onEnterPassword: (v) {
-          final errPass = validatePassword(v);
-          if (errPass!.isNotEmpty) {
+          final String? errPass = validatePassword(v);
+          if (errPass != null && errPass.isNotEmpty) {
             UIUtil.showToast(
               errPass,
               backgroundColor: Colors.red,
@@ -286,66 +286,66 @@ class _LoginPageState extends BaseState<LoginPage> {
                               )),
                         ),
                       ),
-                      if (Platform.isIOS)
-                        Material(
-                          borderRadius: const BorderRadius.all(
-                              Radius.circular(sizeVerySmallx)),
-                          color: Colors.white,
-                          child: InkWell(
-                            onTap: () {
-                              _handleAppleSignIn();
-                            },
-                            splashColor: Colors.white.withAlpha(100),
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(sizeVerySmallx)),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(sizeVerySmallx)),
-                                    border: Border.all(
-                                        width: 0.5,
-                                        color: Colors.grey.shade200)),
-                                padding: const EdgeInsets.only(
-                                    left: sizeNormalxx, right: sizeNormalxx),
-                                height: sizeLargexx + sizeVerySmall,
-                                child: const Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.apple,
-                                    size: sizeNormalxx,
-                                    color: Colors.black,
-                                  ),
-                                )),
-                          ),
-                        ),
-                      Material(
-                        borderRadius: const BorderRadius.all(
-                            Radius.circular(sizeVerySmallx)),
-                        color: Colors.white,
-                        child: InkWell(
-                          onTap: () {
-                            _handleFacebookSignIn();
-                          },
-                          splashColor: Colors.white.withAlpha(100),
-                          borderRadius: const BorderRadius.all(
-                              Radius.circular(sizeVerySmallx)),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(sizeVerySmallx)),
-                                  border: Border.all(
-                                      width: 0.5, color: Colors.grey.shade200)),
-                              padding: const EdgeInsets.only(
-                                  left: sizeNormalxx, right: sizeNormalxx),
-                              height: sizeLargexx + sizeVerySmall,
-                              child: const Center(
-                                child: FaIcon(
-                                  FontAwesomeIcons.facebook,
-                                  size: sizeNormalxx,
-                                  color: Color.fromARGB(250, 22, 93, 240),
-                                ),
-                              )),
-                        ),
-                      ),
+                      // if (Platform.isIOS)
+                      //   Material(
+                      //     borderRadius: const BorderRadius.all(
+                      //         Radius.circular(sizeVerySmallx)),
+                      //     color: Colors.white,
+                      //     child: InkWell(
+                      //       onTap: () {
+                      //         _handleAppleSignIn();
+                      //       },
+                      //       splashColor: Colors.white.withAlpha(100),
+                      //       borderRadius: const BorderRadius.all(
+                      //           Radius.circular(sizeVerySmallx)),
+                      //       child: Container(
+                      //           decoration: BoxDecoration(
+                      //               borderRadius: const BorderRadius.all(
+                      //                   Radius.circular(sizeVerySmallx)),
+                      //               border: Border.all(
+                      //                   width: 0.5,
+                      //                   color: Colors.grey.shade200)),
+                      //           padding: const EdgeInsets.only(
+                      //               left: sizeNormalxx, right: sizeNormalxx),
+                      //           height: sizeLargexx + sizeVerySmall,
+                      //           child: const Center(
+                      //             child: FaIcon(
+                      //               FontAwesomeIcons.apple,
+                      //               size: sizeNormalxx,
+                      //               color: Colors.black,
+                      //             ),
+                      //           )),
+                      //     ),
+                      //   ),
+                      // Material(
+                      //   borderRadius: const BorderRadius.all(
+                      //       Radius.circular(sizeVerySmallx)),
+                      //   color: Colors.white,
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       _handleFacebookSignIn();
+                      //     },
+                      //     splashColor: Colors.white.withAlpha(100),
+                      //     borderRadius: const BorderRadius.all(
+                      //         Radius.circular(sizeVerySmallx)),
+                      //     child: Container(
+                      //         decoration: BoxDecoration(
+                      //             borderRadius: const BorderRadius.all(
+                      //                 Radius.circular(sizeVerySmallx)),
+                      //             border: Border.all(
+                      //                 width: 0.5, color: Colors.grey.shade200)),
+                      //         padding: const EdgeInsets.only(
+                      //             left: sizeNormalxx, right: sizeNormalxx),
+                      //         height: sizeLargexx + sizeVerySmall,
+                      //         child: const Center(
+                      //           child: FaIcon(
+                      //             FontAwesomeIcons.facebook,
+                      //             size: sizeNormalxx,
+                      //             color: Color.fromARGB(250, 22, 93, 240),
+                      //           ),
+                      //         )),
+                      //   ),
+                      // ),
                     ])
               ],
             );
@@ -374,8 +374,8 @@ class _LoginPageState extends BaseState<LoginPage> {
 
   ///Take action google SignIn
   Future<void> _handleGoogleSignIn() async {
-    await _pbLoading!
-        .show(msg: Lang.started_loading_please_wait.tr(), max: 100);
+    // await _pbLoading!
+    //     .show(msg: Lang.started_loading_please_wait.tr(), max: 100);
     try {
       final socialLoginDataResult = await _firebaseWrapper.handleGoogleSignIn();
       socialLoginDataResult.fold((l) {
@@ -397,8 +397,8 @@ class _LoginPageState extends BaseState<LoginPage> {
 
   ///Take action Facebook SignIn
   Future<void> _handleFacebookSignIn() async {
-    await _pbLoading!
-        .show(max: 100, msg: Lang.started_loading_please_wait.tr());
+    // await _pbLoading!
+    //     .show(max: 100, msg: Lang.started_loading_please_wait.tr());
     try {
       final socialLoginDataResult =
           await _firebaseWrapper.handleFacebookSignIn();

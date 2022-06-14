@@ -160,7 +160,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     }),
                   ],
                   if (state is HomeSearchDisplayed &&
-                      (widget.listTrending!.isNotEmpty)) ...[
+                      ( widget.listTrending!= null)) ...[
                     ShortListAssets(
                       onItemClick: openAssetDetail,
                       onClickAll: onClickSeeAllList,

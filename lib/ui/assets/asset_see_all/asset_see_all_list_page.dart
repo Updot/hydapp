@@ -195,44 +195,54 @@ class AssetSeeAllListScreenState extends BaseState<AssetSeeAllListScreen> {
     if (state.currentCate != null) {
       places = state.listGroupCategories![state.currentCate];
     }
-    return ListView.builder(
-      itemCount: places?.length,
-      scrollDirection: Axis.vertical,
-      itemBuilder: (BuildContext context, int index) {
-        final e = places![index];
-        return Container(
-          margin: const EdgeInsets.only(
-            left: sizeVerySmall,
-            right: sizeVerySmall,
-          ),
-          alignment: Alignment.center,
-          child: AssetLargeItem(
-            onItemClick: openAssetDetail,
-            ratio: 1.3,
-            height: height,
-            item: e,
-          ),
-        );
-      },
-    );
+    if(places != null) {
+      return ListView.builder(
+        itemCount: places.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (BuildContext context, int index) {
+          final e = places![index];
+          return Container(
+            margin: const EdgeInsets.only(
+              left: sizeVerySmall,
+              right: sizeVerySmall,
+            ),
+            alignment: Alignment.center,
+            child: AssetLargeItem(
+              onItemClick: openAssetDetail,
+              ratio: 1.3,
+              height: height,
+              item: e,
+            ),
+          );
+        },
+      );
+    }
+    else{
+      return SizedBox();
+    }
   }
 
   Widget categoriesRender(AssetSeeAllState state) {
-    final list = state.listGroupCategories!.entries.toList();
-    return Container(
-      height: sizeNormalxxx,
-      child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: sizeSmall),
-          scrollDirection: Axis.horizontal,
-          itemCount: (list.length) + 1,
-          itemBuilder: (e, index) {
-            if (index == 0) {
-              return itemCategoryAll(state);
-            }
-            final mapEntry = list[index - 1];
-            return itemCategory(mapEntry, state);
-          }),
-    );
+    final list = state.listGroupCategories?.entries.toList();
+    if(list != null) {
+      return Container(
+        height: sizeNormalxxx,
+        child: ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: sizeSmall),
+            scrollDirection: Axis.horizontal,
+            itemCount: (list.length) + 1,
+            itemBuilder: (e, index) {
+              if (index == 0) {
+                return itemCategoryAll(state);
+              }
+              final mapEntry = list[index - 1];
+              return itemCategory(mapEntry, state);
+            }),
+      );
+    }
+    else{
+      return SizedBox();
+    }
   }
 
   Widget itemCategoryAll(AssetSeeAllState state) {

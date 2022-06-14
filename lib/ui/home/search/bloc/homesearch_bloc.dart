@@ -19,10 +19,10 @@ part 'homesearch_event.dart';
 part 'homesearch_state.dart';
 
 class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
-  final SearchRepository? searchRepository;
+  final SearchRepository searchRepository;
 
   HomeSearchBloc({
-    @required this.searchRepository,
+    required this.searchRepository,
   }) : super(HomeSearchInitial());
 
   @override
@@ -54,7 +54,7 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
       if (state is HomeSearchSuccess) {
         lastKeyword = (state as HomeSearchSuccess).keyword;
       }
-      final data = await searchRepository!
+      final data = await searchRepository
           .search(lastKeyword!, event.experienceId ?? state.experienceId!);
       if (data != null) {
         yield* _handleSearchResult(data, lastKeyword, event);
@@ -67,22 +67,23 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
 
   Stream<HomeSearchState> _mapSearchChangedEvent(
       SearchkeyWordEvent event) async* {
-    try {
+    // try {
       yield Searching(
         recentModels: state.recentModels,
         recentTodayModels: state.recentTodayModels,
         recentYesModels: state.recentYesModels,
         experienceId: event.experienceId ?? state.experienceId,
       );
-      final data = await searchRepository!
-          .search(event.keyword!, event.experienceId ?? state.experienceId!);
+      final data = await searchRepository
+          .search(event.keyword ?? '', event.experienceId ?? state.experienceId!);
       if (data != null) {
         yield* _handleSearchResult(data, event.keyword, event);
       }
-    } catch (error) {
-      LogUtils.d(error.toString());
-      yield HomeSearchError(error.toString());
-    }
+    // }
+    // catch (error) {
+    //   LogUtils.d(error.toString());
+    //   yield HomeSearchError(error.toString());
+    // }
   }
 
   Stream<HomeSearchState> _mapClearSearchEvent(ClearSearchEvent event) async* {
@@ -104,7 +105,7 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
       HomeSearchEvent event) async* {
     try {
       ///load from cache
-      final cacheData = searchRepository!.getRecentSearch();
+      final cacheData = searchRepository.getRecentSearch();
       if (cacheData!.isNotEmpty) {
         yield GetSearchRecentEventSuccess(
           recentModels: cacheData,
@@ -116,7 +117,7 @@ class HomeSearchBloc extends Bloc<HomeSearchEvent, HomeSearchState> {
       }
 
       final data =
-          await searchRepository!.recent(5, 'home', DateTime.now().millisecond);
+          await searchRepository.recent(5, 'home', DateTime.now().millisecond);
       yield* _handleRecentResult(data, event);
     } catch (e) {
       yield GetSearchRecentEventSuccess(

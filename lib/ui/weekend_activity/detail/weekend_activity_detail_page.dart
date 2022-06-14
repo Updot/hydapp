@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:marvista/ui/base/bloc/base_bloc.dart';
 import 'package:marvista/ui/login/login_page.dart';
 import 'package:share_plus/share_plus.dart';
@@ -302,7 +303,7 @@ class ActivityDetailScreenState extends BaseState<ActivityDetailScreen> {
       showCupertinoModalPopup(
           context: context,
           builder: (context) =>
-              CupertinoPickerPhotoView(onSelectPhoto: onSelectPhoto));
+              CupertinoPickerPhotoView(onSelectPhoto: onSelectPhoto, imagePicker: ImagePicker(),));
     } else {
       NavigateUtil.openPage(context, LoginPage.routeName);
     }

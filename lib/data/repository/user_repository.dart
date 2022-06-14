@@ -64,7 +64,7 @@ abstract class UserRepository {
 
   Future<Either<Failure, Success>> requestVerify();
 
-  Future<Either<Failure, UserInfo>> getMe({String accessToken});
+  Future<Either<Failure, UserInfo>> getMe({String? accessToken});
 
   Future<Either<Failure, Success>> logout();
 

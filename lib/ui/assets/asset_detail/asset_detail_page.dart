@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:marvista/common/widget/my_social_media.dart';
 import 'package:marvista/data/source/api_end_point.dart';
 import 'package:marvista/utils/utils.dart';
@@ -511,7 +512,7 @@ class AssetDetailScreenState extends BaseState<AssetDetailScreen> {
       showCupertinoModalPopup(
           context: context,
           builder: (context) =>
-              CupertinoPickerPhotoView(onSelectPhoto: onSelectPhoto));
+              CupertinoPickerPhotoView(onSelectPhoto: onSelectPhoto, imagePicker: ImagePicker(),));
     } else {
       NavigateUtil.openPage(context, LoginPage.routeName);
     }

@@ -49,6 +49,7 @@ class ForgotPasswordScreenState extends BaseState<ForgotPasswordScreen> {
   void initState() {
     super.initState();
     needHideKeyboard();
+    _pbLoading = ProgressDialog(context: context);
     //Call this method first when LoginScreen init
     initBasicInfo();
     _newPasswordController.addListener(_onPasswordChanged);
@@ -93,7 +94,7 @@ class ForgotPasswordScreenState extends BaseState<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    _pbLoading = ProgressDialog(context: context);
+    // _pbLoading = ProgressDialog(context: context);
     // _pbLoading!.style(message: Lang.started_loading_please_wait.tr());
     return makeParent(Container(
       color: const Color(0xffFDFBF5),
@@ -383,8 +384,8 @@ class ForgotPasswordScreenState extends BaseState<ForgotPasswordScreen> {
   //Check validate pinCode data and submit to Server
   void doSubmitPinCode() {
     final code = pinCodeData;
-    final errMessageCode = validateCodePassword(code);
-    if (code.isNotEmpty && (errMessageCode!.isEmpty)) {
+    final errMessageCode = validateCodePassword(code) ?? '';
+    if (code.isNotEmpty && (errMessageCode.isEmpty)) {
       _pbLoading!.show(max: 100, msg: Lang.started_loading_please_wait.tr());
       _forgotPasswordBloc.add(SubmitVerifyCode(
           code: code, tokenCode: _forgotPasswordBloc.state.tokenCode));
@@ -405,7 +406,7 @@ class ForgotPasswordScreenState extends BaseState<ForgotPasswordScreen> {
         validateRePassword(newPassWord, confirmNewPassWord);
 
     //validate password
-    if (errMessageNewPassWord!.isNotEmpty) {
+    if (errMessageNewPassWord != null && errMessageNewPassWord.isNotEmpty) {
       UIUtil.showToast(
         errMessageNewPassWord,
         backgroundColor: Colors.red,
@@ -414,7 +415,7 @@ class ForgotPasswordScreenState extends BaseState<ForgotPasswordScreen> {
     }
 
     //validate password and confirm password
-    if (errMessageConfirmPassWord!.isNotEmpty) {
+    if (errMessageConfirmPassWord != null && errMessageConfirmPassWord.isNotEmpty) {
       UIUtil.showToast(
         errMessageConfirmPassWord,
         backgroundColor: Colors.red,

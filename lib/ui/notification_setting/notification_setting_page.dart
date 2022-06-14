@@ -42,7 +42,7 @@ class NotificationSettingScreenState
       if (_pbLoading!.isOpen()) {
         _pbLoading!.close();
       }
-      if (state.success!) {
+      if (state!= null && state.success!= null && state.success!) {
         if (widget.firstTime) {
           NavigateUtil.replacePage(
               context, CongratulationRegisterScreen.routeName,

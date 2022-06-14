@@ -50,7 +50,8 @@ class UploadPhotos {
   /// init upload listener _ STEP 1
   void init() {
     uploader.progress.listen((event) {
-      if (listUploadModel[event.taskId]!.containsKey(STREAM_KEY)) {
+      if (listUploadModel[event.taskId] != null &&
+          listUploadModel[event.taskId]!.containsKey(STREAM_KEY)) {
         listUploadModel[event.taskId]![STREAM_KEY]
             .sink!
             .add({SEND_KEY: event.progress, TOTAL_KEY: 100});
@@ -61,18 +62,23 @@ class UploadPhotos {
       if (event.status == UploadTaskStatus.failed) {
         listUploadModel.remove(event.taskId);
         UIUtil.showToast(event.response ?? 'Upload Fail');
-      } else {
+      } else if (event.response != null) {
         final responseData = ResponseData.fromJson(jsonDecode(event.response!));
 
         ///Get Image Id from Response Data
         final imageId = int.parse(responseData.data['id']);
         // ignore: prefer_asserts_with_message
         assert(imageId is int);
-        checkHasFileInQueue(
-            event.taskId,
-            listUploadModel[event.taskId]![UPLOAD_MODEL_KEY],
-            listUploadModel[event.taskId]![STREAM_KEY],
-            imageId);
+        if (imageId != null &&
+            listUploadModel != null &&
+            event.taskId != null &&
+            listUploadModel.isNotEmpty) {
+          checkHasFileInQueue(
+              event.taskId,
+              listUploadModel[event.taskId]?[UPLOAD_MODEL_KEY],
+              listUploadModel[event.taskId]?[STREAM_KEY],
+              imageId);
+        }
       }
     });
   }
@@ -107,39 +113,22 @@ class UploadPhotos {
   void createUploadTask(File file, UploadModel uploadModel,
       {StreamController? streamCon, List? listImageIds}) async {
     final taskId = await uploader.enqueue(MultipartFormDataUpload(
-            url: getUrl(uploadModel.typePost!),
-            method: UploadMethod.POST,
-            headers: {
-              RemoteBaseImpl.X_CSRF_Token: _environmentInfo.accessToken
-            },
-            data: uploadModel.typePost == TypePost.ADD_CHANGE_PROFILE_PHOTO
-                ? {'field_name': 'user_picture'}
-                : {},
-            files: [FileItem(path: file.path)])
-        // url: getUrl(uploadModel.typePost!),
-        // //required: url to upload to
-        // files: [
-        //   FileItem(
-        //       filename: file.path.split('/').last,
-        //       savedDir: file.parent.path,
-        //       fieldname: FILE_KEY)
-        // ],
-        // data: uploadModel.typePost == TypePost.ADD_CHANGE_PROFILE_PHOTO
-        //     ? {'field_name': 'user_picture'}
-        //     : {},
-        // // required: list of files that you want to upload
-        // method: UploadMethod.POST,
-        // // HTTP method  (POST or PUT or PATCH)
-        // headers: {RemoteBaseImpl.X_CSRF_Token: _environmentInfo.accessToken},
-        //
-        // ///setup access_token
-        // showNotification: true,
+      url: getUrl(uploadModel.typePost!),
+      method: UploadMethod.POST,
+      headers: {RemoteBaseImpl.X_CSRF_Token: _environmentInfo.accessToken},
+      data: uploadModel.typePost == TypePost.ADD_CHANGE_PROFILE_PHOTO
+          ? {'field_name': 'user_picture'}
+          : {},
+      files: [FileItem(path: file.path)],
+    )
+
+        ///setup access_token
         );
 
     listUploadModel[taskId] = {
       STREAM_KEY: streamCon ?? StreamController(),
       UPLOAD_MODEL_KEY: uploadModel,
-      IMAGE_ID_LIST_KEY: listImageIds,
+      IMAGE_ID_LIST_KEY: listImageIds ?? [],
     };
   }
 
@@ -149,9 +138,12 @@ class UploadPhotos {
       StreamController streamController, int imageId) {
     if (listUploadModel.containsKey(key)) {
       ///Store Image Id to List
-      listUploadModel[key]![IMAGE_ID_LIST_KEY].add(imageId);
+      listUploadModel[key]![IMAGE_ID_LIST_KEY]?.add(imageId);
 
-      uploadModel.file!.removeAt(0);
+      if (uploadModel.file != null && uploadModel.file!.isNotEmpty) {
+        uploadModel.file?.removeAt(0);
+      }
+
       if (uploadModel.file!.isEmpty) {
         ///If empty file to upload, close stream and submit final Step
         closeStreamAndRemove(key);
@@ -172,9 +164,8 @@ class UploadPhotos {
       listUploadModel[key]![STREAM_KEY]!.close();
       final UploadModel uploadModel = listUploadModel[key]![UPLOAD_MODEL_KEY];
       final ids = <int>[];
-      final List<dynamic> image =
-          listUploadModel[key]![IMAGE_ID_LIST_KEY].toList();
-      image.forEach(ids.add as dynamic);
+      final List? image = listUploadModel[key]?[IMAGE_ID_LIST_KEY]?.toList();
+      image?.forEach(ids.add as dynamic);
       doFinalStep(uploadModel, ids);
 
       listUploadModel.remove(key);

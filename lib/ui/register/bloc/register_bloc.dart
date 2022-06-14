@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:location/location.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/model/app_config.dart';
@@ -126,7 +127,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         return state.submitResult(status: RegisterStatus.registerSuccess);
       });
 
-      add(DoLogin(result.getOrElse(null!)));
+      add(DoLogin(result.getOrElse(() {
+        return '';
+      })));
     } else if (event is DoLogin) {
       final result =
           await userRepository!.getMe(accessToken: event.accessToken);

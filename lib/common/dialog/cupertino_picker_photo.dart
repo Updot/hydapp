@@ -19,9 +19,9 @@ import '../widget/my_text_view.dart';
 class CupertinoPickerPhotoView extends StatelessWidget {
   final Function(String path) onSelectPhoto;
   final Function(List<String> path)? onSelectPhotos;
-   ImagePicker? imagePicker;
+   ImagePicker imagePicker;
   CupertinoPickerPhotoView(
-      {Key? key, required this.onSelectPhoto, this.onSelectPhotos})
+      {Key? key, required this.onSelectPhoto, this.onSelectPhotos,required this.imagePicker})
       : super(key: key);
 
   @override
@@ -75,33 +75,33 @@ class CupertinoPickerPhotoView extends StatelessWidget {
 
   Future getGalleryPhotos(BuildContext context) async {
     Navigator.pop(context);
-    var resultList = <Asset>[];
+    List<XFile>? resultList = [];
     var error = 'No Error Dectected';
 
     // UIUtil.showToast(Lang.report_hold_on_to_select_multiple.tr());
     try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 3,
-        enableCamera: true,
-        selectedAssets: [],
-        cupertinoOptions: const CupertinoOptions(takePhotoIcon: 'tag'),
-        materialOptions: const MaterialOptions(
-          actionBarColor: '#abcdef',
-          actionBarTitle: 'Hudayriyat Island',
-          allViewTitle: 'All Photos',
-          useDetailsView: false,
-          selectCircleStrokeColor: '#000000',
-        ),
-      );
+      final ImagePicker _picker = ImagePicker();
+      resultList = await _picker.pickMultiImage();
+      // MultiImagePicker.pickImages(
+      //   maxImages: 3,
+      //   enableCamera: true,
+      //   selectedAssets: [],
+      //   cupertinoOptions: const CupertinoOptions(takePhotoIcon: 'tag'),
+      //   materialOptions: const MaterialOptions(
+      //     actionBarColor: '#abcdef',
+      //     actionBarTitle: 'Hudayriyat Island',
+      //     allViewTitle: 'All Photos',
+      //     useDetailsView: false,
+      //     selectCircleStrokeColor: '#000000',
+      //   ),
+      // );
     } on Exception catch (e) {
       error = e.toString();
     }
 
     final paths = <String>[];
-    for (var i = 0; i < resultList.length; i++) {
-      final path2 =
-          await FlutterAbsolutePath.getAbsolutePath(resultList[i].identifier!);
-      var newFile = File(path2!);
+    for (var i = 0; i < resultList!.length; i++) {
+      var newFile = File(resultList[i].path);
       final hasFile = await newFile.exists();
       if (hasFile) {
         final dir = path.dirname(newFile.path);
@@ -132,7 +132,7 @@ class CupertinoPickerPhotoView extends StatelessWidget {
     Navigator.pop(context);
 
     // // ignore: deprecated_member_use
-    final image = await imagePicker!.pickImage(
+    final image = await imagePicker.pickImage(
         maxWidth: 1024, source: ImageSource.gallery);
     if (image != null && image.path != null) {
       final dir = path.dirname(image.path);
@@ -148,7 +148,7 @@ class CupertinoPickerPhotoView extends StatelessWidget {
     Navigator.pop(context);
     final image =
         // ignore: deprecated_member_use
-        await imagePicker!.pickImage(maxWidth: 1024, source: ImageSource.camera);
+        await imagePicker.pickImage(maxWidth: 1024, source: ImageSource.camera);
     if (image != null && image.path != null) {
       final dir = path.dirname(image.path);
       final newPath =

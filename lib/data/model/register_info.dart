@@ -9,13 +9,13 @@ class RegisterInfo {
     _accessToken = accessToken;
   }
 
-  String get tokenCode => _tokenCode!;
-  set tokenCode(String tokenCode) => _tokenCode = tokenCode;
+  String? get tokenCode => _tokenCode;
+  set tokenCode(String? tokenCode) => _tokenCode = tokenCode;
 
-  String get accessToken => _accessToken!;
-  set accessToken(String accessToken) => _accessToken = accessToken;
+  String? get accessToken => _accessToken;
+  set accessToken(String? accessToken) => _accessToken = accessToken;
 
-  RegisterInfo.fromJson(Map<String, dynamic> json) {
+  RegisterInfo.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
       return;
     }

@@ -7,12 +7,12 @@ class EventDetailState extends Equatable {
   final List<EventInfo>? listEventAlsoLike;
   final EventRoute? currentRoute;
   final UserInfo? userInfo;
-  final bool? isRefreshing;
+  final bool isRefreshing;
 
   EventDetailState(
       {this.eventDetailInfo,
       this.timeRefresh,
-      this.isRefreshing,
+      this.isRefreshing = false,
       this.currentRoute,
       this.userInfo,
       this.listEventAlsoLike});
@@ -34,7 +34,7 @@ class EventDetailState extends Equatable {
     return EventDetailState(
       userInfo: userInfo ?? userInfo,
       eventDetailInfo: eventDetailInfo ?? this.eventDetailInfo,
-      isRefreshing: isRefreshing,
+      isRefreshing: isRefreshing ?? false,
       listEventAlsoLike: listEventAlsoLike ?? this.listEventAlsoLike,
       timeRefresh: timeRefresh ?? this.timeRefresh,
       currentRoute: currentRoute ?? this.currentRoute,
@@ -43,12 +43,12 @@ class EventDetailState extends Equatable {
 
   @override
   List<Object> get props => [
-        eventDetailInfo!,
-        timeRefresh!,
-        isRefreshing!,
-        userInfo!,
-        listEventAlsoLike!,
-        currentRoute!,
+        eventDetailInfo ?? '',
+        timeRefresh ?? '',
+        isRefreshing ,
+        userInfo ?? '',
+        listEventAlsoLike?? '',
+        currentRoute?? '',
       ];
 }
 
